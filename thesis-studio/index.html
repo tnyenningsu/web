@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>論文寫作工作臺</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header><div class="wrap top"><span>研究寫作</span><a href="https://github.com/tnyenningsu/web/blob/main/thesis-studio/README.md">設定說明</a></div></header>
+  <main class="wrap">
+    <section class="intro">
+      <h1>論文寫作工作臺</h1>
+      <p>用歷年論文掌握你的寫作方式，用研究文獻支持新稿的論點。</p>
+    </section>
+    <div class="layout">
+      <div class="inputs">
+        <section class="card" aria-labelledby="sourceTitle">
+          <h2 id="sourceTitle">論文與文獻</h2>
+          <details>
+            <summary>連接 Google Drive（也可直接上傳 PDF）</summary>
+            <label for="client">Google OAuth 用戶端 ID</label>
+            <input id="client" placeholder="….apps.googleusercontent.com" autocomplete="off">
+            <p class="hint">首次使用須在 Google Cloud 啟用 Drive API，建立「網頁應用程式」OAuth 用戶端，並將 <code id="origin"></code> 加入已授權的 JavaScript 來源。</p>
+            <div class="buttons"><button type="button" id="authorize">授權讀取</button><button type="button" id="disconnect" class="light" disabled>中斷連線</button></div>
+            <p id="driveStatus" class="hint" role="status">尚未連線</p>
+          </details>
+          <div class="source">
+            <h3>我的歷年論文 <span>寫作範本</span></h3>
+            <label for="styleFolder">Google Drive 資料夾連結</label>
+            <div class="inline"><input id="styleFolder" placeholder="https://drive.google.com/drive/folders/…"><button type="button" data-scan="style" class="light">讀取 PDF 清單</button></div>
+            <label class="file">上傳歷年論文 PDF <input type="file" data-files="style" accept=".pdf,application/pdf" multiple></label>
+            <div id="styleList" class="filelist"></div>
+          </div>
+          <div class="source">
+            <h3>研究文獻 <span>引用依據</span></h3>
+            <label for="evidenceFolder">Google Drive 資料夾連結</label>
+            <div class="inline"><input id="evidenceFolder" placeholder="https://drive.google.com/drive/folders/…"><button type="button" data-scan="evidence" class="light">讀取 PDF 清單</button></div>
+            <label class="file">上傳研究文獻 PDF <input type="file" data-files="evidence" accept=".pdf,application/pdf" multiple></label>
+            <div id="evidenceList" class="filelist"></div>
+          </div>
+          <p id="sourceStatus" class="hint" role="status"></p>
+        </section>
+        <form class="card" id="draftForm">
+          <h2>本次寫作要求</h2>
+          <label for="topic">論文題目或研究構想</label>
+          <textarea id="topic" rows="2" required placeholder="例如：生成式 AI 閱讀提示對國小高年級學生獨立閱讀理解的影響"></textarea>
+          <label for="study">研究對象、場域、變項或設計</label>
+          <textarea id="study" rows="2"></textarea>
+          <div class="pair">
+            <div><label for="language">稿件語言</label><select id="language"><option>繁體中文</option><option>英文</option></select></div>
+            <div><label for="sections">交付章節</label><select id="sections"><option value="緒論與文獻探討">緒論與文獻探討</option><option value="緒論">只寫緒論</option><option value="文獻探討">只寫文獻探討</option></select></div>
+          </div>
+          <div class="pair">
+            <div><label for="length">字數</label><input id="length" placeholder="例如：緒論約 800 字"></div>
+            <div><label for="citation">引用格式</label><input id="citation" value="APA 第 7 版"></div>
+          </div>
+          <label for="journal">目標期刊或格式要求</label>
+          <input id="journal">
+          <label for="notes">指定文獻、論證重點或其他要求</label>
+          <textarea id="notes" rows="3"></textarea>
+          <details>
+            <summary>使用 Gemini 直接生成</summary>
+            <label for="key">Gemini API 金鑰</label>
+            <input id="key" type="password" autocomplete="off">
+            <label for="model">模型 ID</label>
+            <input id="model" value="gemini-3.1-flash-lite" autocomplete="off">
+            <p class="hint">供個人使用。送出時，瀏覽器會把勾選的 PDF 與寫作要求直接傳給 Gemini API。金鑰只用於當次請求，頁面不會儲存金鑰。<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">取得 Gemini API 金鑰</a></p>
+          </details>
+          <div class="buttons">
+            <button type="submit" value="prompt">產生 ChatGPT 指令</button>
+            <button type="submit" value="gemini" class="light">用 Gemini 生成初稿</button>
+          </div>
+        </form>
+      </div>
+      <section class="card result" aria-labelledby="outputTitle">
+        <h2 id="outputTitle">寫作輸出</h2>
+        <p id="resultStatus" class="hint" role="status">填寫題目並選擇兩類 PDF，即可開始。</p>
+        <div id="attachments" hidden></div>
+        <label class="sr" for="output">可編修的寫作輸出</label>
+        <textarea id="output" rows="21" placeholder="寫作指令或論文初稿會顯示在這裡。"></textarea>
+        <div class="buttons">
+          <button type="button" id="copy" class="light">複製</button>
+          <button type="button" id="download" class="light">下載 Markdown</button>
+          <a id="chat" href="https://chatgpt.com/" target="_blank" rel="noopener" hidden>開啟 ChatGPT ↗</a>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
