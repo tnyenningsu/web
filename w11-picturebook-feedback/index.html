@@ -86,6 +86,28 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   .group-number { min-width: 3.7rem; }
   .status { max-width: 5rem; }
 }
+
+.submission-guide { margin: 0 0 .85rem; padding: .7rem .9rem; border: 1px solid var(--line); border-radius: .55rem; color: var(--muted); background: var(--white); font-size: .94rem; }
+.submission-editor { margin-top: 1rem; padding: .85rem; border: 1px solid var(--line); border-radius: .55rem; background: var(--teal-soft); }
+.submission-editor h3 { color: var(--teal); margin: 0 0 .42rem; font-size: 1.05rem; }
+.submission-editor p { margin: .35rem 0; }
+.submission-panel { margin-top: .7rem; }
+.submission-panel > summary { display: list-item; list-style: revert; min-height: auto; padding: .4rem 0; color: var(--teal); font-weight: 750; }
+.submission-panel > summary::-webkit-details-marker { display: revert; }
+.submission-form { margin-top: .55rem; }
+.submission-form label { font-weight: 700; display: block; margin-bottom: .7rem; }
+.submission-form input, .submission-form textarea { display: block; width: 100%; margin-top: .22rem; padding: .55rem .62rem; border: 1px solid #97ada5; border-radius: .3rem; font: inherit; font-weight: 400; background: var(--white); color: var(--ink); }
+.submission-form textarea { min-height: 5rem; resize: vertical; }
+.submission-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem; }
+.submission-editor button, .submission-guide button { background: var(--teal); border: 1px solid var(--teal); color: var(--white); border-radius: .36rem; padding: .42rem .7rem; font: inherit; font-weight: 700; cursor: pointer; }
+.submission-editor button:disabled { opacity: .55; cursor: default; }
+.submission-editor button:focus-visible, .submission-guide button:focus-visible { outline: 3px solid #a2610d; outline-offset: 3px; }
+.submission-status, .submission-date { color: var(--muted); font-size: .93rem; }
+.submission-preview { margin: .65rem 0 .2rem; }
+.submission-preview div { margin: .48rem 0; }
+.submission-preview dt { color: var(--teal); font-weight: 750; }
+.submission-preview dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.submission-preview .book-link { display: inline-block; margin-bottom: .25rem; white-space: normal; }
 </style>
 </head>
 <body>
@@ -111,6 +133,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   </aside>
   <section aria-labelledby="groups">
     <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
+    <div class="submission-guide">
+      展開自己的組別即可填寫與儲存，無需帳號密碼。補交連結與自填內容會顯示於此頁，知道網址的人皆可查看及編輯。請只編輯自己的組別，避免填入姓名等個人資料。補交前請把繪本設為知道連結者可檢視。
+      <span id="submission-global-status" role="status"></span>
+      <button id="submission-retry" type="button" hidden>重新讀取</button>
+    </div>
       <details class="group" id="group-1">
         <summary>
           <span class="group-number">第 1 組</span>
@@ -465,5 +492,181 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
       </details>
   </section>
 </main>
+<script>
+(() => {
+  const api = "https://w11-picturebook-submissions.yenningsu.chatgpt.site" + '/api/submissions';
+  const fields = [
+    ['goal', '對應可衡量的學習目標'],
+    ['outcome', '預期學習成果'],
+    ['activity', '延伸活動建議'],
+  ];
+  const dateFormat = new Intl.DateTimeFormat('zh-TW', {
+    dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Taipei',
+  });
+  const states = [];
+  const globalStatus = document.querySelector('#submission-global-status');
+  const retry = document.querySelector('#submission-retry');
+
+  function create(tag, text, className) {
+    const element = document.createElement(tag);
+    if (text) element.textContent = text;
+    if (className) element.className = className;
+    return element;
+  }
+
+  function renderSaved(state, record) {
+    state.record = record;
+    state.preview.replaceChildren();
+    if (state.requiresBook && record.bookUrl) {
+      const link = create('a', '開啟補交的繪本', 'book-link');
+      link.href = record.bookUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      state.preview.append(link);
+    }
+    const list = create('dl', '', 'submission-preview');
+    for (const [name, label] of fields) {
+      if (!record[name]) continue;
+      const row = create('div');
+      row.append(create('dt', label), create('dd', record[name]));
+      list.append(row);
+    }
+    if (list.childElementCount) state.preview.append(list);
+    if (record.updatedAt) {
+      state.preview.append(create('p', '最後儲存 ' + dateFormat.format(new Date(record.updatedAt)), 'submission-date'));
+    } else {
+      state.preview.append(create('p', '這組尚未儲存自填內容。', 'submission-date'));
+    }
+    if (state.requiresBook) {
+      state.group.querySelector(':scope > summary .status').textContent = record.bookUrl ? '已補交，待評閱' : state.originalStatus;
+      state.group.querySelector('.empty-message').hidden = Boolean(record.bookUrl);
+      if (state.originalTitle === '尚無提交紀錄') {
+        state.group.querySelector('.book-title').textContent = record.bookUrl ? '已補交繪本' : state.originalTitle;
+      }
+    }
+  }
+
+  function loadInputs(state) {
+    for (const [name, input] of Object.entries(state.inputs)) {
+      input.value = state.record[name] || '';
+    }
+    state.baseRevision = state.record.revision;
+    state.loadNew.hidden = true;
+  }
+
+  for (const group of document.querySelectorAll('details.group')) {
+    const number = Number(group.id.replace('group-', ''));
+    const requiresBook = group.classList.contains('pending');
+    const originalStatus = group.querySelector(':scope > summary .status')?.textContent;
+    const originalTitle = group.querySelector('.book-title').textContent;
+    const section = create('section', '', 'submission-editor');
+    const preview = create('div');
+    const panel = create('details', '', 'submission-panel');
+    const summary = create('summary', requiresBook ? '填寫或修改繪本連結與學習設計' : '填寫或修改學習設計');
+    const form = create('form', '', 'submission-form');
+    const inputs = {};
+    const status = create('p', '', 'submission-status');
+    status.setAttribute('role', 'status');
+    const actions = create('div', '', 'submission-actions');
+    const save = create('button', '儲存');
+    save.type = 'submit';
+    save.disabled = true;
+    const loadNew = create('button', '將表單換成最新已儲存內容');
+    loadNew.type = 'button';
+    loadNew.hidden = true;
+
+    const inputFields = requiresBook ? [['bookUrl', '繪本連結'], ...fields] : fields;
+    for (const [name, label] of inputFields) {
+      const wrapper = create('label', label);
+      const input = create(name === 'bookUrl' ? 'input' : 'textarea');
+      input.name = name;
+      input.maxLength = name === 'bookUrl' ? 2048 : 1000;
+      if (name === 'bookUrl') {
+        input.type = 'url';
+        input.placeholder = 'https://';
+      } else {
+        input.rows = 3;
+      }
+      input.disabled = true;
+      inputs[name] = input;
+      wrapper.append(input);
+      form.append(wrapper);
+    }
+    actions.append(save, loadNew);
+    form.append(actions, status);
+    panel.append(summary, form);
+    section.append(create('h3', '各組自填'), preview, panel);
+    group.querySelector('.group-body').append(section);
+    const state = { group, number, requiresBook, originalStatus, originalTitle, inputs, preview, save, loadNew, status, record: null };
+    states.push(state);
+
+    loadNew.addEventListener('click', () => {
+      loadInputs(state);
+      save.disabled = false;
+      status.textContent = '已將表單換成最新內容，可以繼續修改。';
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!state.record || save.disabled) return;
+      const edited = Object.fromEntries(Object.entries(inputs).map(([name, input]) => [name, input.value]));
+      save.disabled = true;
+      loadNew.disabled = true;
+      for (const input of Object.values(inputs)) input.disabled = true;
+      status.textContent = '儲存中…';
+      try {
+        const result = await fetch(api + '/' + number, {
+          method: 'PUT',
+          credentials: 'omit',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...edited, revision: state.baseRevision }),
+        });
+        const data = await result.json();
+        if (result.status === 409 && data.record) {
+          renderSaved(state, data.record);
+          loadNew.hidden = false;
+          status.textContent = '已有其他人更新。上方顯示最新內容，表單仍保留你輸入的文字。可以先複製你要保留的文字，再將表單換成最新內容。';
+          return;
+        }
+        if (!result.ok) throw new Error(data.error || '暫時無法儲存。');
+        renderSaved(state, data.record);
+        loadInputs(state);
+        status.textContent = '已儲存，換裝置也能查看。';
+      } catch (error) {
+        status.textContent = (error instanceof TypeError ? '連線失敗，請稍後重試。' : error.message) + ' 表單仍保留輸入內容。';
+      } finally {
+        save.disabled = !loadNew.hidden;
+        for (const input of Object.values(inputs)) input.disabled = false;
+        loadNew.disabled = false;
+      }
+    });
+  }
+
+  async function loadAll() {
+    retry.hidden = true;
+    globalStatus.textContent = '正在讀取各組已儲存內容…';
+    try {
+      const result = await fetch(api, { cache: 'no-store', credentials: 'omit' });
+      if (!result.ok) throw new Error('Shared storage unavailable');
+      const { records } = await result.json();
+      for (const state of states) {
+        if (state.record) continue;
+        const record = records[state.number];
+        if (!record) throw new Error('Incomplete response');
+        renderSaved(state, record);
+        loadInputs(state);
+        for (const input of Object.values(state.inputs)) input.disabled = false;
+        state.save.disabled = false;
+      }
+      globalStatus.textContent = '';
+    } catch {
+      globalStatus.textContent = '暫時無法讀取各組自填內容。';
+      retry.hidden = false;
+    }
+  }
+  retry.addEventListener('click', loadAll);
+  loadAll();
+})();
+</script>
 </body>
 </html>
