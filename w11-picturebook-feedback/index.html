@@ -111,6 +111,8 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 .association-guide button { font: inherit; }
 .association-editor .submission-form select { display: block; width: 100%; margin-top: .22rem; padding: .55rem .62rem; border: 1px solid #97ada5; border-radius: .3rem; background: var(--white); color: var(--ink); font: inherit; }
 .association-editor .submission-preview dd { overflow-wrap: anywhere; }
+.association-feedback + .association-feedback { border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .55rem; }
+.association-feedback h4 { margin: .35rem 0; color: var(--teal); }
 </style>
 </head>
 <body>
@@ -137,9 +139,9 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   <section aria-labelledby="groups">
     <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
     <div class="association-guide">
-      <strong>聯想策略互評</strong>　展開自己的組別，查看指定對象。選對方繪本的一頁，設計提問，讓孩子把圖文和生活經驗或已知事物連起來，再帶孩子回到繪本。若對方尚未補交，可在作品出現後再完成設計。<br>例：看見雨傘圖，請孩子說說放學遇到下雨的經驗，再回到圖上找角色帶傘的原因。
+      <strong>聯想策略融入</strong>　展開自己的組別，自選兩個不同組別，每組各設計一份。選對方繪本的一頁，引導孩子把圖文與生活經驗或已知事物連起來，再帶孩子回到繪本。<br>例：看見雨傘圖，請孩子說說放學遇到下雨的經驗，再回到圖上找角色帶傘的原因。
       <span id="association-status" role="status"></span>
-      <button id="association-retry" type="button" hidden>重新讀取互評</button>
+      <button id="association-retry" type="button" hidden>重新讀取聯想策略</button>
     </div>
     <div class="submission-guide" hidden>
       <span id="submission-global-status" role="status"></span>
@@ -157,13 +159,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/19Hp5NWCw0lpOlQBlPCPBAPbOqq_RHPsQTYJ6oFzjSTY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 1 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>搶先玩溜滑梯的情境貼近下課生活，容易帶出排隊、等候與輪流的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁符合一下的文字量。第 7 頁約 56 字，可縮短老師陪伴的旁白，保留球球說出感受的對話。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>以第 7 頁為主要停問點。球球說「我也想先玩」後，問「她可以怎麼跟小安說？」再翻第 8 頁核對。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，正文約 17–19 pt。第 7 頁可把老師和球球的對話各自分行。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖文比例尚未穩定接近 1:1。第 3、8、9 頁以大圖為主、正文放在小框中，第 7 頁則是多段對話搭配右下小圖。建議將第 7–8 頁改成接近等寬的圖文雙欄，分別保留球球說感受和提出輪流的關鍵句。先共讀第 7 頁，再請孩子自己讀第 8 頁「我們可以輪流玩」，並指圖說明是哪個角色提出的。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的抱胸、皺眉和獨坐呼應情緒變化。小安前後衣服顏色不同，建議統一，方便辨認。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>兩個孩子都想先玩溜滑梯，這個衝突選得貼近低年級的下課生活。老師建議保留這個場景，共讀時可請孩子想想，自己有沒有也遇過需要排隊或輪流的時候。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁的字量符合一年級下學期。第 7 頁約 56 字，老師建議縮短陪伴情節的旁白，留下球球說出感受的對話，孩子會更容易跟讀。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 7 頁已交代球球也想先玩，適合停下來問「她可以怎麼跟小安說？」讓孩子先說一個辦法，再翻到第 8 頁核對。這個停問點值得保留。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，約 17–19 pt，提供了基本的認讀支持。第 7 頁若能將老師和球球的話各自換行，孩子會更容易辨認說話者。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 3、8、9 頁以大圖為主，第 7 頁則是較多對話搭配右下小圖，圖文比例尚未穩定接近 1:1。老師建議先調整第 7–8 頁，讓圖與正文區接近各半。共讀第 7 頁後，請孩子自己讀第 8 頁「我們可以輪流玩」，再指圖說出是誰提出這個辦法。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁用抱胸、皺眉和獨坐呈現球球的變化，與正文相呼應。若能統一小安前後頁的服裝或辨識特徵，孩子會更容易跟上故事。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是人際關係技巧，輪流的做法在故事中有具體示範。老師建議把邀請與輪流的對話保留下來，作為各組自訂可觀察目標時的依據。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -189,13 +191,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1bAr_cRcua502Ppdb28ewO511OKE74VLWSLoTJrjR5uk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 3 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>向家人、警衛、老師和新同學問好，貼近一年級開學初期的生活。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2–9 頁約 37–53 字，超過前 10 週的建議範圍。每頁可保留一句旁白與一句問候。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2–9 頁停問較密。可集中在第 8 頁，讓孩子看新同學低頭的樣子，猜小華接下來會說什麼。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有約 20 pt 的注音字型。第 9 頁圖上的問候小字約 11 pt，可放大。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁採左圖、右文，兩區各約一半，配置接近 1:1。前 10 週的孩子仍可能難以獨立讀完右欄，建議每頁保留一句短旁白和一句問候。前幾頁由教師帶讀「早安」，再讓孩子從圖辨認對象，自己讀出「警衛叔叔，早安」或「老師，早安」。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>澆水壺、警衛制服和校門都能提示小華遇見誰。第 8 頁新同學低頭的動作也與文字相符。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>向家人、警衛、老師和同學問好的情境，能連結一年級開學初期的日常。老師建議保留一路遇見不同人的安排，讓孩子比較遇到不同對象時可以怎麼打招呼。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2–9 頁約 37–53 字，高於前 10 週每頁約 10–30 字的設定。建議每頁留下短旁白與一句問候，讓孩子有機會跟讀並認出反覆出現的詞語。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 8 頁新同學低著頭，提供了可以觀察的線索。老師建議把主要停問放在這裡，先問「小華會怎麼開口？」再讀第 9 頁的自我介紹，預測和核對會更清楚。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 20 pt，附有注音。第 9 頁圖上的問候字約 11 pt，建議放大，讓投影共讀時坐在後排的孩子也看得到。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁左圖、右文，配置接近 1:1。反覆出現的「早安」「你好」也值得保留。老師建議先帶讀一頁，後面的頁面請孩子看圖辨認對象，再自己讀出對應的問候。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>澆水壺、警衛制服與校門都能幫孩子辨認人物和場景。第 8 頁新同學低頭的動作也接得上正文，適合請孩子指著畫面說出自己看到的線索。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是人際關係技巧。故事已有主動問候與自我介紹兩種具體行為，建議選定其中一個情境作為 SEL 學習設計的重點。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -211,13 +213,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1CFzJAJR8vV2MUcdFjvAB_JBDP0hBj71dO4VnAEWaH-o/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 4 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>天氣角色有想像力。插隊、朋友沒來一起玩、第一次參加比賽等情節能連結孩子的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 4、6、8、10 頁約 88–99 字，前 10 週的學生閱讀負擔較大。每頁可縮成一個情緒線索與一句關鍵對話。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>可先保留烏雲和小旋風兩段。第 4 頁問「如果你是烏雲，你會怎麼說自己為什麼生氣？」第 14 頁已揭曉小晴的心情，適合回顧。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，部分故事頁的旁白與對話較密。可把角色的關鍵一句話獨立成行。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>部分故事頁的上圖與下方正文區在版面上接近 1:1，但第 4、6、8、10 頁將長段文字集中在圖下，前 10 週的孩子較難從聽讀轉到自己讀。可維持上下分區，縮短旁白，並在文字區用大字反覆呈現「我覺得＿＿，因為＿＿」。教師先帶讀烏雲的句子，再讓孩子對照下一個角色的圖，自己讀出一個情緒句。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>閃電和雨滴分別支援生氣、難過的理解。第 6 頁畫面重點是小雨滴，文字寫「雲朵說」，請統一說話角色。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於自我覺察。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>把插隊、朋友沒來一起玩和第一次參加比賽放進天氣角色的故事，很能引出孩子的校園經驗。老師建議保留孩子熟悉的情境，讓抽象情緒有具體的事件可以對照。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 4、6、8、10 頁約 88–99 字，前 10 週的孩子較難自己讀完。每頁若只保留一個情緒線索與一句角色對話，會更符合 10–30 字的閱讀設定。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>烏雲和小旋風是適合停問的兩段。老師建議在第 4 頁先讓孩子猜烏雲會怎麼說明自己的生氣，再翻頁核對。第 14 頁已揭曉心情，放在結尾回顧會更合適。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，圖與正文有清楚的上下分區。部分故事頁的旁白和對話較密，若把情緒關鍵句獨立成行，教師比較容易帶讀，孩子也容易找到要讀的那一句。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>部分故事頁的上下圖文區接近 1:1，但第 4、6、8、10 頁文字集中，前 10 週的孩子較難自行接讀。建議縮短旁白，保留反覆句型「我覺得＿＿，因為＿＿」，先帶讀烏雲的一句，再讓孩子對照下一個角色自己試讀。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>閃電、雨滴及角色表情都能幫孩子辨別情緒。第 6 頁畫面重點是小雨滴，正文卻寫「雲朵說」。若統一說話角色，孩子就更容易配對圖文。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>故事適合聚焦自我覺察。老師建議先抓住「認出情緒」和「知道為什麼有這種感受」這條主線，讓不同天氣角色的段落都服務同一個 SEL 重點。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -233,13 +235,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1N73WCWkIw3CZtmiFbD2KB-RLKhIGeKVYo4cXFTPtP98/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 5 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>下課觀察昆蟲、想加入同學，以及同學對昆蟲有不同感受，都有校園生活的對應情境。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 19–29 字，符合上學期後 10 週。繪本內標第 5 頁約 36 字，可縮短旁白，保留邀請句。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>內標第 7 頁的停問時機恰當。可問「阿麥想一起玩，同學又怕蚱蜢，她可以怎麼做？」請孩子用前一頁的線索說理由。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>約 24 pt 的注音正文易讀。建議用繪本內頁碼標註預測頁，並統一封面與登記表的書名。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖文分區清楚，左側插圖略小於右側正文區，整體已接近 1:1。內標第 5 頁可縮短旁白，讓邀請句獨立一行。教師先共讀阿麥想加入的情節，再請孩子自己讀「請問我可以跟你們玩嗎？」及下一頁同學的回答，透過文字確認雙方各說了什麼。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>內標第 3 頁同學後退的動作呼應文字。內標第 2 頁可補一個蚱蜢動作不便的線索，交代阿麥為何照顧牠。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於社會覺察。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>喜歡昆蟲、想加入同學，又碰到同伴害怕的情境，能連結校園裡常見的不同偏好。這個主題值得保留，孩子有機會練習理解兩邊的想法。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 19–29 字，貼近上學期後 10 週。內標第 5 頁約 36 字，若縮短阿麥準備開口的旁白，孩子會更容易把注意力放在邀請句。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>內標第 7 頁在同學說怕蚱蜢後、阿麥提出辦法前停問，時機恰當。建議只留一問「阿麥可以怎麼做？」並請孩子說出前一頁讓他這樣猜的線索。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>約 24 pt 的注音正文易讀，左右分區也清楚。老師建議統一封面和登記書名，並用內頁頁碼標示停問，方便其他組試教。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>左右圖文區已接近 1:1，適合由看圖走向讀對話。可將內標第 5 頁的邀請句獨立成行，先共讀阿麥想加入的情節，再請孩子自己讀出邀請和同學的回答。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>同學往後退的動作對應內標第 3 頁的文字。內標第 2 頁若能讓蚱蜢呈現一點行動不便的樣子，孩子能更早從圖中理解阿麥為什麼想照顧牠。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是社會覺察。同一隻蚱蜢讓阿麥和同學有不同感受，這個對比很適合帶共讀。後續可把理解對方感受與尊重界線的說法連起來。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -285,13 +287,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1HqxmP58-0rw6qO5VQ2eSNkpd4pjk5mJWDdcN27XFP3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 9 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>花了很久搭好的城堡被同伴碰倒，孩子容易理解艾倫為什麼又生氣又難過。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 5–7 頁約 37–45 字。結尾約 57 字，可縮成「先停一下、慢慢呼吸、說出感受」三個短句。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 5 頁用臉紅、握拳預測艾倫的下一步。第 7 頁可預測呼吸後拳頭如何變化，再翻頁核對。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音。第 7 頁可將老師的話和艾倫的呼吸動作分行。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>故事頁多以上方插圖帶情節，正文集中在下方窄帶，圖的視覺分量較大，與 1:1 有差距。可把第 7–8 頁改成較均衡的圖文區，保留呼吸動作和艾倫說感受的短句。第 7 頁讓孩子跟著教師讀和做，第 8 頁再自己讀「我也很難過」並找出艾倫難過的原因。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的火山呼應比喻。第 10–11 頁和艾倫一起搭城堡的同伴外觀與第 9 頁的小宇不同，建議統一。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>搭了很久的城堡被碰倒，很容易讓孩子連結自己的挫折經驗。故事同時寫出艾倫生氣和難過，值得保留，能讓孩子看到同一件事可能帶來不只一種感受。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 5–7 頁約 37–45 字，符合一年級下學期。結尾約 57 字，老師建議收成三個短句，讓孩子能讀出「停一下、慢慢呼吸、說出感受」。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 5 頁的臉紅、握拳可以預測下一步，第 7 頁則可預測呼吸後的身體變化。若帶讀時間有限，建議保留第 7 頁，翻到第 8 頁核對拳頭是否放鬆。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，附有注音。第 7 頁可分開老師說的話和艾倫的動作，讀到動作時停一下讓孩子跟做，會更順暢。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁的正文集中在插圖下方窄帶，圖文比例尚未接近 1:1。老師建議先調整第 7–8 頁，讓正文有較大的獨立區。第 7 頁一起讀和做呼吸，第 8 頁再請孩子自己讀出艾倫難過的原因。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的火山讓抽象的生氣變得看得見。第 10–11 頁重搭城堡的同伴外觀與第 9 頁的小宇不同，建議統一，讓孩子辨認出是原來的同伴一起修復關係。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是自我管理。故事已把握拳、慢呼吸和放鬆的變化連起來，老師建議保留這段完整過程，方便各組把能力寫成可以觀察的行為。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -307,13 +309,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://canva.link/lh604tgg6vk7kwc" target="_blank" rel="noopener noreferrer" aria-label="開啟第 10 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>害怕打雷、想找人陪伴，是孩子能理解並分享的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>「心跳得快快的」「慢慢吸氣」具體易懂。「安定自己」可換成「讓自己慢慢平靜下來」。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2、5 頁有清楚線索，下一頁也可核對。第 9 頁可聚焦問「小明最後可能對雨傘說什麼？」</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>第 5 頁的「陪／伴」被拆行，請按詞語和意思斷行，並固定「猜一猜」的呈現方式。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>已核對的第 5、9、10 頁插圖較突出，文字主要在畫面右下方或頁底，圖文分量尚未穩定接近 1:1。可先將第 5 頁改成等寬圖文區，讓兩種害怕各有一行正文。共讀時先從雷雲和角落的插圖找線索，再讓孩子自己讀雨傘的兩句話，用文字確認牠怕什麼。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的雷雲和角落裡的雨傘對應兩種害怕。第 10 頁若畫的是小明家，可將「回家前」改為「回到家後」。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於社會覺察。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>害怕打雷和想有人陪是孩子能理解的經驗。會說話的雨傘也提供了觀察他人感受的機會，老師建議保留雨傘把害怕說出口的情節。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>「心跳得快快的」「慢慢吸氣」具體易懂。若把「安定自己」改成「讓自己慢慢平靜下來」，孩子比較能用自己的話說出意思。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2、5 頁都有可用的線索，下一頁也有對應情節。第 9 頁可將問題聚焦為「小明最後可能對雨傘說什麼？」答案會比較容易回到作品中核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>第 5 頁有「陪／伴」被拆行的情形。老師建議讓完整詞語連在同一行，並用固定的方式呈現「猜一猜」，讓孩子一眼區分正文與停問。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 5、9、10 頁的插圖較突出，文字多在右下或頁底，尚未穩定接近 1:1。建議先放寬第 5 頁的文字區，讓雨傘的兩種害怕各有一行。先共讀圖中的雷雲和角落，再請孩子自己讀句子確認牠怕什麼。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的雷雲和角落分別對應雨傘的兩種害怕，圖文線索安排得清楚。第 10 頁若畫的是小明家，文字改成「回到家後」會更貼合場景。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦社會覺察。小明聽到雨傘害怕後的回應很具體，老師建議以「理解對方感受並給予陪伴」作為共讀的主要 SEL 方向。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -329,13 +331,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1f_AaJ1prrcg_dpzsGPVebFXQyXpA1GE9Eyix_Dtcl7g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 11 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>想加入同學遊戲卻不知道怎麼開口，貼近低年級下課經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁文字量適中。「友善表達自己的需求」可改成「好好說出你想做什麼」。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 3、6 頁適合猜米米的行動與說法。第 4 頁正文已寫出她的心情，可先看圖判斷，再讀文字核對。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 20–22 pt，有注音。可固定「想一想」的位置，方便辨認停問點。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁左側插圖約佔三分之二，右側窄欄同時放正文和提問，圖文配置偏圖多。可把第 6–8 頁改成圖文各約一半，讓第 7 頁的邀請句有獨立一行。先共讀第 6 頁，再讓孩子自己讀第 7 頁「我也想一起玩，可以嗎？」並用下一頁的回答核對同伴是否接受。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁低頭、縮起身體呼應孤單與難過。第 9 頁三人一起收拾玩具，讓孩子看得見合作。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>想加入遊戲卻不知道怎麼開口，貼近一年級下課經驗。老師建議保留米米從旁觀到主動詢問的轉折，孩子容易把它連到自己的校園生活。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁字量適中。若把「友善表達自己的需求」換成「好好說出你想做什麼」，孩子比較容易讀懂，也能用相近的說法轉述。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 3、6 頁適合預測米米的選擇與說法。第 4 頁已在正文說出心情，可以先展示圖，請孩子從米米的姿勢推想，再揭示文字核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 20–22 pt，有注音。若將「想一想」放在固定位置，教師和孩子翻頁後會更快找到停問點。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁左圖約佔三分之二，正文及提問擠在右側窄欄。老師建議調整第 6–8 頁，讓圖文區接近 1:1。先共讀第 6 頁，再請孩子自己讀第 7 頁的邀請句，並讀下一頁確認同伴的回應。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁低頭、縮起身體呼應難過，第 9 頁一起收拾玩具也把合作畫得具體。這兩頁值得保留，可讓孩子指著動作說明自己怎麼看出人物的變化。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是人際關係技巧。米米的邀請句清楚、自然，有機會在班級生活中使用，建議將「如何開口加入遊戲」維持為主要共讀目標。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -351,13 +353,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1gW0SGJXekpXQsgrPQBFWxD8aJNdxMa9_ue-5DFk26Yo/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 12 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>積木被撞倒、誤會對方是故意的，以及事後道歉，都是孩子能理解的班級衝突。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 30–50 字。第 8 頁可讓插圖交代小刺去找阿噗的動作，正文保留道歉的話。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 7 頁練完三步驟後先問「小刺會去找誰？會說什麼？」請學生用前文線索說理由，再翻第 8 頁核對。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，多數約 18 pt。步驟卡部分文字可略放大，第 8 頁的旁白與道歉對話可分行。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 2–9 頁以大幅跨頁圖為主，正文多放在畫面上下的小區塊，圖文分量偏圖多。可把第 7 頁的三步驟改為左圖示、右短句各約一半，讓教師先指圖帶讀第一步，再請孩子自己讀其餘兩步。第 8 頁可用同樣分區，讓孩子試讀一句道歉，從文字確認小刺如何開口。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁豎起的背刺、散落的積木和阿噗後退的動作都呼應文字。第 7 頁可指著圖示依序練習。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>積木被撞倒、誤會對方故意，以及冷靜後道歉，是低年級孩子能理解的班級衝突。老師建議保留小刺和阿噗各自的反應，讓孩子看到同一件事的兩個角度。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 30–50 字，貼近一年級下學期。第 8 頁可把小刺走去找阿噗的過程交給插圖，正文集中在道歉的話，讀起來會更輕鬆。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 7 頁的三步驟提供了推想小刺下一步的線索。老師建議先問「他會去找誰？會說什麼？」讓孩子說明理由，再翻第 8 頁核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文多數約 18 pt，附有注音。第 7 頁的步驟卡值得保留，較小的步驟文字可略放大，第 8 頁也可把道歉對話單獨分行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 2–9 頁以跨頁大圖為主，正文多放在小區塊，圖文分量偏圖多。建議把第 7 頁的圖示和短句調成接近各半，教師帶讀第一步後，請孩子自己讀其餘兩步。第 8 頁也可用相同配置，讓孩子試讀一句道歉。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁豎起的背刺、散落的積木和後退的阿噗都對應正文。第 7 頁的圖示也足以支持指圖跟做，老師建議保留這種一次呈現一個動作的安排。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是自我管理。深呼吸、數到五、說出感受是清楚的行動順序。老師建議讓這個順序在全書維持一致，方便共讀時跟讀與演練。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -373,13 +375,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1aF_5DyspK0wBZoPOUJ6a0oGT3NwNdsz3m2SQNcTIios/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 13 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>雨後在公園發現蚯蚓，能連結孩子觀察校園或公園裡小動物的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、8 頁約 55 字以上，可減少重複描述，保留「怕乾」「用力抓會弄傷牠」等關鍵線索。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁讓學生根據「不能用手硬抓」來想工具，再翻第 7 頁確認捷克的選擇。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音，提問已放入備忘稿。第 2 頁的「他覺得」可與後文排成完整語意單位。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁採左圖、右文，兩區接近 1:1。第 8 頁右欄敘事較密，可將「把葉子放在前面」和「用樹枝輕輕引導」各排成一行。教師先共讀第 6 頁找出不能硬抓的原因，再讓孩子自己讀第 7–8 頁的關鍵句，指出捷克選了什麼以及怎麼用。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 7–8 頁看得出葉子是運送工具。第 8 頁可加小圖畫出樹枝如何引導蚯蚓爬上葉子。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於負責任的決定。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>雨後看到蚯蚓，是孩子可能在校園或公園遇到的情境。透過一個看得到的小動物談照顧與選擇，故事和生活的連結是清楚的。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、8 頁約 55 字以上。老師建議減少重複描述，保留「怕乾」「用力抓會弄傷牠」等會影響捷克選擇的文字，孩子比較容易讀到重點。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁讓孩子用「不能用手硬抓」來想工具，再翻第 7 頁核對，線索與驗證都具體。這個設計值得保留，也可追問「你選的工具怎麼幫到蚯蚓？」</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音，教師提問也已放在備忘稿。第 2 頁可將「他覺得」和後面的內容排成一個語意單位，讓孩子讀出完整意思。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數故事頁左圖右文，兩區接近 1:1。老師建議把第 8 頁的兩個主要動作各排成一行。先共讀第 6 頁找原因，再請孩子自己讀第 7–8 頁的關鍵句，確認捷克選了什麼、怎麼用。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 7–8 頁能看出大葉子是運送工具。若再補一格小圖畫出樹枝引導蚯蚓爬上葉子的動作，孩子讀到相關句子時會更容易理解。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦負責任的決定。故事已有比較做法及後果的空間，老師建議保留捷克思考「這樣做會不會弄傷牠」的線索，讓選擇有看得見的理由。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -395,13 +397,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1UUldLmThDdaTecxz-KCJ7qx8fAzvH513yb4Dps6NWu8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 14 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>心愛的小卡被同學不小心弄濕，能帶出責怪、誤會和事後修復的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁約 34–40 字。「慌張」可搭配小宇急著擦桌子的動作理解。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 8、11 頁都在情節揭曉之前。可分別請學生依小宇紅眼和拿衛生紙的線索，猜晴晴接下來會怎麼做。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，約 24 pt。可把完整問句移入教師備忘稿，讓學生停在有線索的故事畫面。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 3–7、9–10、13 頁都有圖文分區，但插圖欄較窄，部分故事頁如第 12、14 頁只有文字。可把第 9–10 頁的圖文調成接近等寬，並在第 12 頁補上兩人一起擦桌子的圖。共讀第 9 頁後，讓孩子在第 10、12 頁自己讀一句，找出小宇先做了什麼、晴晴後來怎麼加入。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、9 頁紅色怪獸由大變小，和情緒變化相呼應。第 10 頁可再凸顯衛生紙、桌面的水與擦拭動作。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>小卡被同學不小心弄濕，是低年級讀者容易代入的情境，並自然帶出誤會、道歉和一起補救。老師建議保留小宇實際擦桌子的動作。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁約 34–40 字，符合一年級下學期。像「慌張」這類詞，可以讓孩子搭配小宇急著補救的動作理解，不必增加長段說明。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 8、11 頁都放在情節揭曉之前。若停問時讓孩子同時看得到小宇紅眼或拿衛生紙的前頁畫面，孩子會更容易說出預測的根據。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 24 pt，附有注音。老師建議把完整教學問句放進備忘稿，保留故事畫面讓大家共讀，版面會更連貫。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>第 3–7、9–10、13 頁有圖文分區，但插圖欄較窄，第 12、14 頁則只有文字。建議先把第 9–10 頁調成近 1:1，第 12 頁補上兩人擦桌子的圖。共讀第 9 頁後，可讓孩子試讀一句，找出兩人分別做了什麼。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、9 頁紅色怪獸由大變小，清楚呼應晴晴的情緒變化。第 10 頁若能凸顯衛生紙、水和擦拭動作，孩子會更容易看出小宇正在補救。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是自我管理，深呼吸後才回應的轉折清楚。老師建議以這條主線帶讀，再從小宇的補救動作延伸到理解他人的處境。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -417,13 +419,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1vBJcRch0Odg7c4g9K1ljljLNoGy3xEHwxg_LTO_mSoI/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 15 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>奇幻場景可從「發現同伴不安時能怎麼幫忙」切入，讓孩子連結自己的經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、6 頁句子偏長。「眼神充滿不安」可具體寫成「牠縮在草叢裡，一直看著小禾」。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2 頁可從叫聲和神情猜小禾怎麼靠近狐狸，第 6 頁可從樹變暗、寶石不見猜兩人接下來會去哪裡找。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>文字有注音，並以半透明底框與背景區隔。可縮短長行、放寬行距。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>森林插圖幾乎滿版，文字多放在上方的半透明框，圖文比例明顯偏圖多。建議先將第 6–8 頁改成圖文各約一半，第 6 頁保留「星星樹的光變暗了」和「寶石不見了」等短句。教師先共讀第 6 頁，再請孩子自己讀第 7 或第 8 頁的關鍵句，對照插圖指出寶石在哪裡找到或送回。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、8 頁的星星樹由暗到亮。第 2 頁可用草葉遮住狐狸部分身體，並加強警戒神情，配合躲藏的文字。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>需補強，可聚焦於人際關係技巧。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>奇幻場景有吸引力。老師建議從「發現同伴不安時，能怎麼靠近或幫忙」切入，讓孩子先連結熟悉的人際經驗，再進到森林故事。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、6 頁句子較長。「眼神充滿不安」可拆成看得見的動作，例如「牠縮在草叢裡，一直看著小禾」，孩子會更容易理解。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2 頁的叫聲與神情、第 6 頁變暗的星星樹與不見的寶石，都能當成線索。老師建議每處留下明確的猜測問題，也標記翻到哪一頁核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音與半透明底框，已能和背景區隔。若能縮短長行並放寬行距，孩子跟讀時會比較容易找到下一行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>插圖幾乎滿版，文字集中在上方小框，圖文比例偏圖多。可先將第 6–8 頁的圖文區調成接近各半。教師共讀第 6 頁後，請孩子自己讀第 7 或第 8 頁的一句，對照插圖找到寶石出現的位置。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、8 頁星星樹由暗轉亮，符合情節。第 2 頁若再用草葉遮住狐狸部分身體，並畫出牠警戒的神情，會更貼合文字的躲藏線索。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>故事有合作基礎，可聚焦人際關係技巧。老師建議補清楚小禾和小狐狸各自做了什麼，讓孩子能從情節辨認分工與互相幫忙。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -439,13 +441,13 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
             <a class="book-link" href="https://docs.google.com/presentation/d/1U74vP2tJ2CNaCFZ8yDFH9PKt7rekvvZQYJo4SLFFL98/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener noreferrer" aria-label="開啟第 16 組繪本（新分頁）">開啟繪本</a>
           </div>
           <dl class="review">
-          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>玩扮家家酒時都想拿同一把茶壺，孩子容易代入，也能連結借用與輪流的生活經驗。</p></dd></div>
-          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁接近一下的文字量。「豁然開朗」可改成「小惠懂了」，「免子」請修正為「兔子」。</p></dd></div>
-          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁可用小美跑開的線索，猜小惠接下來會怎麼做。第 9 頁可先練說輪流句，再猜小美會怎麼回應。</p></dd></div>
-          <div class="review-item"><dt>繪本排版</dt><dd><p>多數正文約 17 pt，有注音。請刪除第 10 頁的「文字在這裡」，並將道歉和輪流請求分行。</p></dd></div>
-          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數頁以滿版圖加窄文字框，圖文比例偏圖多。第 9–10 頁可各留約一半的版面放正文，將輪流請求與道歉分行。先共讀第 9 頁的輪流句，再讓孩子自己讀第 10 頁小惠的道歉與請求，對照畫面找出她是對誰說的。</p></dd></div>
-          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的拿茶壺、拍手臂呼應文字。第 8 頁可畫小白兔正在和小惠說話，用小框保留搶茶壺的回想。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p></dd></div>
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>兩個孩子想拿同一把茶壺，貼近低年級扮家家酒的經驗。老師建議保留這個具體物件，孩子比較容易想到自己借玩具或輪流玩的情境。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁貼近一年級下學期的文字量。把「豁然開朗」換成「小惠懂了」，並把「免子」改成「兔子」，孩子會更容易讀懂。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁小美跑開後，可以停問小惠下一步會怎麼做。第 9 頁已有輪流句，可先請孩子練說，再猜小美怎麼回應，翻頁後核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>多數正文約 17 pt，有注音。老師建議清除第 10 頁的「文字在這裡」，並將道歉和提出輪流的話分行，孩子比較容易找到要練習的句子。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>多數頁是滿版圖搭配窄文字框，圖文比例偏圖多。第 9–10 頁若各保留約一半給正文，讀者就更容易接讀。先共讀輪流句，再請孩子自己讀第 10 頁的道歉與請求，並指圖確認小惠在對誰說。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁拿茶壺與拍手臂的畫面呼應文字。第 8 頁若改以小白兔和小惠對話為主圖，將搶茶壺放進小框當回想，前後情節會更容易分辨。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>主要能力是自我管理。小惠先調節情緒再開口，後面也有道歉與輪流的互動，老師建議保留這個順序，讓孩子看清楚行動是怎麼一步一步發生的。</p></dd></div>
           </dl>
         </div>
       </details>
@@ -663,169 +665,224 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   retry.addEventListener('click', loadAll);
   loadAll();
 
-  const associationApi = api.replace(/submissions$/, 'associations');
+
+  const associationApi = api.replace(/submissions$/, 'association-choices');
   const designFields = [
     ['page', '設計頁碼', 40, '例如：第 5 頁'],
-    ['clue', '聯想線索', 500, '你會指著哪一個標題、插圖或詞語？'],
-    ['prompt', '教師提問', 500, '例如：看到這個，你想到家裡或出門時的什麼？'],
-    ['childResponse', '孩子可能的反應', 500, '孩子可能說什麼？也可以用短詞、畫圖或動作表達。'],
-    ['returnToText', '教師接話與理解重點', 750, '教師怎麼把孩子的聯想接回圖文？孩子因此能讀懂什麼？'],
+    ['clue', '聯想線索', 500, '你會指著哪個標題、插圖或詞語？'],
+    ['prompt', '教師提問', 500, '看到這個，你想到生活中的什麼？'],
+    ['childResponse', '孩子可能的反應', 500, '可以用短詞、畫圖或動作表達。'],
+    ['returnToText', '教師接話與理解重點', 750, '怎麼把聯想接回圖文？孩子因此能讀懂什麼？'],
   ];
   const associationStatus = document.querySelector('#association-status');
   const associationRetry = document.querySelector('#association-retry');
 
-  async function loadAssociationTask() {
-    associationRetry.hidden = true;
-    associationStatus.textContent = '正在讀取指定組別…';
-    try {
-      const result = await fetch(associationApi, { cache: 'no-store', credentials: 'omit' });
-      if (!result.ok) throw new Error('無法讀取互評。');
-      const { assignments, types, records } = await result.json();
-      if (assignments.length !== states.length || new Set(assignments).size !== states.length) {
-        throw new Error('無法讀取指定組別。');
+  async function readAssociations() {
+    const result = await fetch(associationApi, { cache: 'no-store', credentials: 'omit' });
+    if (!result.ok) throw new Error('無法讀取聯想策略。');
+    return result.json();
+  }
+
+  function renderReceived(preview, recipient, records) {
+    preview.replaceChildren();
+    const designs = Object.values(records).flatMap(record => record.designs)
+      .filter(design => design?.target === recipient);
+    if (!designs.length) {
+      preview.append(create('p', '尚未收到聯想策略建議。', 'submission-date'));
+      return;
+    }
+    for (const design of designs) {
+      const key = create('article', '', 'association-feedback');
+      key.append(create('h4', '第 ' + design.author + ' 組的建議'));
+      const list = create('dl', '', 'submission-preview');
+      for (const [name, label] of [['type', '聯想方式'], ...designFields]) {
+        const row = create('div');
+        row.append(create('dt', label), create('dd', design[name]));
+        list.append(row);
       }
-      const previews = new Map();
-
-      function showReceived(author, record) {
-        const area = previews.get(assignments[author - 1]);
-        area.replaceChildren();
-        if (!record.type) {
-          area.append(create('p', '尚未收到聯想策略建議。', 'submission-date'));
-          return;
-        }
-        const list = create('dl', '', 'submission-preview');
-        for (const [name, label] of [['type', '聯想方式'], ...designFields]) {
-          const row = create('div');
-          row.append(create('dt', label), create('dd', record[name]));
-          list.append(row);
-        }
-        area.append(list);
-        area.append(create('p', '最後儲存　' + dateFormat.format(new Date(record.updatedAt)), 'submission-date'));
-      }
-
-      for (const state of states) {
-        const target = assignments[state.number - 1];
-        const reviewer = assignments.indexOf(state.number) + 1;
-        const section = create('section', '', 'submission-editor association-editor');
-        const assignment = create('p');
-        assignment.append(create('strong', '指定設計對象：第 ' + target + ' 組'), document.createTextNode('　'));
-        const jump = create('a', '查看第 ' + target + ' 組作品');
-        jump.href = '#group-' + target;
-        jump.addEventListener('click', () => {
-          const targetGroup = document.getElementById('group-' + target);
-          targetGroup.open = true;
-          targetGroup.querySelector('summary').focus({ preventScroll: true });
-        });
-        assignment.append(jump);
-
-        const panel = create('details', '', 'submission-panel');
-        panel.append(create('summary', '填寫給第 ' + target + ' 組的聯想策略'));
-        const form = create('form', '', 'submission-form');
-        const inputs = {};
-        const typeLabel = create('label', '聯想方式');
-        const select = create('select');
-        select.required = true;
-        const placeholder = create('option', '請選擇聯想方式');
-        placeholder.value = '';
-        select.append(placeholder);
-        for (const type of types) select.append(create('option', type));
-        typeLabel.append(select);
-        form.append(typeLabel);
-        inputs.type = select;
-        for (const [name, label, maxLength, hint] of designFields) {
-          const wrapper = create('label', label);
-          const input = create(name === 'page' ? 'input' : 'textarea');
-          input.required = true;
-          input.maxLength = maxLength;
-          input.placeholder = hint;
-          wrapper.append(input);
-          form.append(wrapper);
-          inputs[name] = input;
-        }
-        const save = create('button', '儲存聯想策略');
-        save.type = 'submit';
-        const latest = create('button', '載入最新內容');
-        latest.type = 'button';
-        latest.hidden = true;
-        const buttons = create('div', '', 'submission-actions');
-        buttons.append(save, latest);
-        const status = create('p', '', 'submission-status');
-        status.setAttribute('role', 'status');
-        form.append(buttons, status);
-        panel.append(form);
-
-        const received = create('details', '', 'submission-panel');
-        const preview = create('div');
-        previews.set(state.number, preview);
-        const receivedStatus = create('p', '', 'submission-status');
-        receivedStatus.setAttribute('role', 'status');
-        received.append(create('summary', '查看第 ' + reviewer + ' 組提供的建議'), receivedStatus, preview);
-        received.addEventListener('toggle', async () => {
-          if (!received.open) return;
-          receivedStatus.textContent = '正在讀取最新建議…';
-          try {
-            const result = await fetch(associationApi, { cache: 'no-store', credentials: 'omit' });
-            if (!result.ok) throw new Error('無法讀取互評。');
-            const data = await result.json();
-            showReceived(reviewer, data.records[reviewer]);
-            receivedStatus.textContent = '';
-          } catch {
-            receivedStatus.textContent = '暫時無法更新。可收合後再展開重試。';
-          }
-        });
-        section.append(create('h3', '聯想策略互評'), assignment, panel, received);
-        state.group.querySelector('.group-body').append(section);
-
-        let current = records[state.number];
-        function fillSaved() {
-          for (const [name, element] of Object.entries(inputs)) element.value = current[name] || '';
-          latest.hidden = true;
-          save.disabled = false;
-          status.textContent = current.type ? '已載入本組儲存的設計。' : '';
-        }
-        fillSaved();
-        latest.addEventListener('click', fillSaved);
-
-        form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          if (save.disabled) return;
-          const values = Object.fromEntries(Object.entries(inputs).map(([name, input]) => [name, input.value]));
-          save.disabled = true;
-          for (const input of Object.values(inputs)) input.disabled = true;
-          status.textContent = '儲存中…';
-          try {
-            const result = await fetch(associationApi + '/' + state.number, {
-              method: 'PUT', credentials: 'omit', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ...values, target, revision: current.revision }),
-            });
-            const data = await result.json();
-            if (result.status === 409 && data.record) {
-              current = data.record;
-              showReceived(state.number, current);
-              latest.hidden = false;
-              status.textContent = '這組已有更新的版本。表單保留你剛輸入的內容，可先複製留存，再載入最新內容。';
-              return;
-            }
-            if (!result.ok) throw new Error(data.error || '暫時無法儲存。');
-            current = data.record;
-            showReceived(state.number, current);
-            status.textContent = '已儲存，第 ' + target + ' 組現在可以查看。';
-          } catch (error) {
-            status.textContent = (error instanceof TypeError ? '連線失敗，請稍後重試。' : error.message) + ' 表單保留輸入內容。';
-          } finally {
-            for (const input of Object.values(inputs)) input.disabled = false;
-            save.disabled = !latest.hidden;
-          }
-        });
-      }
-      for (const state of states) showReceived(state.number, records[state.number]);
-      associationStatus.textContent = '';
-    } catch {
-      associationStatus.textContent = '暫時無法讀取聯想策略互評。';
-      associationRetry.hidden = false;
+      key.append(list, create('p', '最後儲存　' + dateFormat.format(new Date(design.updatedAt)), 'submission-date'));
+      preview.append(key);
     }
   }
 
+  function selectField(form, label, placeholder, choices) {
+    const wrapper = create('label', label);
+    const select = create('select');
+    select.required = true;
+    select.append(new Option(placeholder, ''));
+    for (const [value, text] of choices) select.append(new Option(text, value));
+    wrapper.append(select);
+    form.append(wrapper);
+    return select;
+  }
+
+  function mountAssociation(state, types, records, previews) {
+    let current = records[state.number];
+    let saving = false;
+    let conflict = false;
+    const forms = [];
+    const section = create('section', '', 'submission-editor association-editor');
+    const count = create('p', '', 'submission-date');
+    const status = create('p', '', 'submission-status');
+    status.setAttribute('role', 'status');
+    const latest = create('button', '載入兩份最新內容');
+    latest.type = 'button';
+    latest.hidden = true;
+    section.append(create('h3', '聯想策略融入'), count, status, latest);
+
+    function updateCount() {
+      count.textContent = '已儲存 ' + current.designs.filter(Boolean).length + '／2 組';
+    }
+
+    function updateButtons() {
+      for (const { save } of forms) save.disabled = saving || conflict;
+    }
+
+    function fillSaved() {
+      for (const [slot, view] of forms.entries()) {
+        const record = current.designs[slot] || {};
+        for (const [name, input] of Object.entries(view.inputs)) input.value = record[name] || '';
+        view.updateTarget();
+      }
+      conflict = false;
+      latest.hidden = true;
+      updateCount();
+      updateButtons();
+    }
+
+    for (let slot = 0; slot < 2; slot++) {
+      const panel = create('details', '', 'submission-panel');
+      panel.append(create('summary', '設計 ' + (slot + 1)));
+      const form = create('form', '', 'submission-form');
+      const choices = states.filter(item => item.number !== state.number)
+        .map(item => [item.number, '第 ' + item.number + ' 組']);
+      const target = selectField(form, '回饋組別', '請自選一組', choices);
+      const jump = create('a', '查看所選組別作品');
+      jump.hidden = true;
+      jump.addEventListener('click', () => {
+        const group = document.getElementById('group-' + target.value);
+        if (group) {
+          group.open = true;
+          group.querySelector('summary').focus({ preventScroll: true });
+        }
+      });
+      form.append(jump);
+      const updateTarget = () => {
+        jump.hidden = !target.value;
+        jump.href = '#group-' + target.value;
+      };
+      target.addEventListener('change', updateTarget);
+      const type = selectField(form, '聯想方式', '請選擇聯想方式', types.map(t => [t, t]));
+      const inputs = { target, type };
+      for (const [name, label, maxLength, hint] of designFields) {
+        const wrapper = create('label', label);
+        const input = create(name === 'page' ? 'input' : 'textarea');
+        input.required = true;
+        input.maxLength = maxLength;
+        input.placeholder = hint;
+        wrapper.append(input);
+        form.append(wrapper);
+        inputs[name] = input;
+      }
+      const save = create('button', '儲存這份策略');
+      save.type = 'submit';
+      const formStatus = create('p', '', 'submission-status');
+      formStatus.setAttribute('role', 'status');
+      form.append(save, formStatus);
+      panel.append(form);
+      section.append(panel);
+      forms.push({ inputs, save, updateTarget });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (saving || conflict) return;
+        const values = Object.fromEntries(Object.entries(inputs).map(([name, input]) => [name, input.value]));
+        const recipient = Number(values.target);
+        if (current.designs[1 - slot]?.target === recipient) {
+          formStatus.textContent = '另一份策略已選這一組，請改選其他組別。';
+          return;
+        }
+        saving = true;
+        updateButtons();
+        for (const input of Object.values(inputs)) input.disabled = true;
+        formStatus.textContent = '儲存中…';
+        try {
+          const result = await fetch(associationApi + '/' + state.number, {
+            method: 'PUT', credentials: 'omit', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...values, target: recipient, slot, revision: current.revision }),
+          });
+          const data = await result.json();
+          if (result.status === 409 && data.record) {
+            current = data.record;
+            conflict = true;
+            latest.hidden = false;
+            status.textContent = '本組已有較新的儲存。請先複製欲保留的草稿，再載入最新內容。';
+            formStatus.textContent = '';
+            return;
+          }
+          if (!result.ok) throw new Error(data.error || '暫時無法儲存。');
+          const previousRecipient = current.designs[slot]?.target;
+          current = data.record;
+          records[state.number] = current;
+          for (const group of new Set([previousRecipient, recipient])) {
+            const view = previews.get(group);
+            if (view?.details.open) renderReceived(view.content, group, records);
+          }
+          updateCount();
+          formStatus.textContent = '已儲存，第 ' + recipient + ' 組可以查看。';
+        } catch (error) {
+          formStatus.textContent = (error instanceof TypeError ? '連線失敗，請稍後重試。' : error.message) + ' 表單保留輸入內容。';
+        } finally {
+          saving = false;
+          for (const input of Object.values(inputs)) input.disabled = false;
+          updateButtons();
+        }
+      });
+    }
+
+    latest.addEventListener('click', () => {
+      fillSaved();
+      status.textContent = '已載入本組最新的兩份設計。';
+    });
+    fillSaved();
+
+    const received = create('details', '', 'submission-panel');
+    const preview = create('div');
+    const readStatus = create('p', '', 'submission-status');
+    readStatus.setAttribute('role', 'status');
+    received.append(create('summary', '查看其他組給本組的建議'), readStatus, preview);
+    previews.set(state.number, { details: received, content: preview });
+    renderReceived(preview, state.number, records);
+    received.addEventListener('toggle', async () => {
+      if (!received.open) return;
+      readStatus.textContent = '正在讀取最新建議…';
+      try {
+        const latest = await readAssociations();
+        Object.assign(records, latest.records);
+        renderReceived(preview, state.number, records);
+        readStatus.textContent = '';
+      } catch {
+        readStatus.textContent = '暫時無法更新，可收合後再展開。';
+      }
+    });
+    section.append(received);
+    state.group.querySelector('.group-body').append(section);
+  }
+
+  async function loadAssociationTask() {
+    associationRetry.hidden = true;
+    associationStatus.textContent = '正在讀取聯想策略…';
+    try {
+      const { types, records } = await readAssociations();
+      if (states.some(({ number }) => !Array.isArray(records[number]?.designs))) throw new Error('資料不完整');
+      const previews = new Map();
+      for (const state of states) mountAssociation(state, types, records, previews);
+      associationStatus.textContent = '';
+    } catch {
+      associationStatus.textContent = '暫時無法讀取聯想策略。';
+      associationRetry.hidden = false;
+    }
+  }
   associationRetry.addEventListener('click', loadAssociationTask);
   loadAssociationTask();
 })();
