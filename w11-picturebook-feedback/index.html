@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="教學媒體與應用 W11 數位繪本作品連結、七項檢核指標與各組回饋。">
+<meta name="theme-color" content="#123b36">
+<title>W11 數位繪本｜各組回饋</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #182d2b;
+  --muted: #526461;
+  --teal: #123b36;
+  --teal-soft: #ebf5f0;
+  --line: #d9e4dd;
+  --paper: #f4f7f3;
+  --white: #fff;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  line-height: 1.65;
+  background: var(--paper);
+  color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: var(--teal); }
+a:focus-visible, summary:focus-visible { outline: 3px solid #a2610d; outline-offset: 4px; border-radius: .25rem; }
+.wrap { width: min(75rem, calc(100% - 3rem)); margin-inline: auto; }
+.masthead { background: var(--teal); color: var(--white); padding: 2.8rem 0 3rem; border-bottom: .3rem solid #e9b96d; }
+.course { margin: 0 0 .55rem; color: #f5d297; font-size: .95rem; font-weight: 700; letter-spacing: .06em; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.7rem); margin: 0; line-height: 1.17; letter-spacing: -.035em; }
+.subtitle { margin: 1rem 0 0; color: #dfede6; }
+.layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 2fr); gap: clamp(1.4rem, 4vw, 3rem); align-items: start; padding-block: 2.3rem 3.5rem; }
+h2 { font-size: 1.42rem; line-height: 1.3; margin: 0; }
+.rubric { padding: 1.35rem; background: var(--white); border: 1px solid var(--line); border-radius: .85rem; }
+.indicators { margin: 1.1rem 0; padding-left: 1.45rem; }
+.indicators li { margin-bottom: .8rem; padding-left: .1rem; }
+.indicators li::marker { color: #37685d; font-weight: 700; }
+.indicators strong { display: block; line-height: 1.45; }
+.indicators li span { display: block; color: var(--muted); font-size: .94rem; margin-top: .15rem; }
+.threshold { margin: 0; padding-top: .9rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .94rem; }
+.section-header { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem 1rem; flex-wrap: wrap; margin: .1rem 0 .85rem; }
+.section-header p { color: var(--muted); font-size: .92rem; margin: 0; }
+.group { background: var(--white); border: 1px solid var(--line); border-radius: .72rem; margin-bottom: .62rem; }
+.group[open] { border-color: #8cbaad; }
+summary { display: flex; align-items: center; gap: .75rem; padding: .85rem 1rem; min-height: 4.1rem; cursor: pointer; list-style: none; border-radius: inherit; }
+summary::-webkit-details-marker { display: none; }
+summary:hover, .group[open] > summary { background: var(--teal-soft); }
+.group-number { white-space: nowrap; min-width: 4.6rem; color: #20564a; font-weight: 800; font-size: .94rem; }
+.group-heading { flex: 1; min-width: 0; }
+.book-title, .group-meta { display: block; }
+.book-title { font-weight: 750; font-size: 1.09rem; line-height: 1.4; }
+.group-meta, .status { font-size: .88rem; color: var(--muted); }
+.group-meta { margin-top: .12rem; }
+.status { text-align: right; }
+.toggle { width: 1rem; height: 1rem; position: relative; flex: 0 0 1rem; color: #24594e; }
+.toggle::before, .toggle::after { content: ""; position: absolute; width: .8rem; height: 2px; background: currentColor; left: .1rem; top: calc(50% - 1px); border-radius: 2px; }
+.toggle::after { transform: rotate(90deg); }
+.group[open] .toggle::after { transform: none; }
+.group-body { border-top: 1px solid var(--line); padding: 1rem 1.1rem 1.15rem; }
+.priority { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .6rem 1rem; padding: .9rem 1rem; border-radius: .55rem; background: #fcf1db; }
+.priority strong { color: #6a450d; font-size: .94rem; }
+.priority p, .review p { margin: 0; }
+.book-link { padding: .42rem .85rem; color: var(--white); background: var(--teal); border-radius: .35rem; text-decoration: none; white-space: nowrap; font-weight: 700; }
+.book-link:hover { background: #246356; }
+.review { margin: .45rem 0 0; }
+.review-item { padding: .82rem 0; border-bottom: 1px solid var(--line); }
+.review-item:last-child { border-bottom: 0; padding-bottom: .15rem; }
+.review-item dt { font-weight: 800; color: var(--teal); }
+.review-item dd { margin: .2rem 0 0; }
+.outcome { border-left: 3px solid #5e9a8b; padding: .45rem .7rem; margin-top: .55rem; background: var(--teal-soft); }
+.outcome strong { font-size: .94rem; }
+.empty-message { margin: 0; color: var(--muted); }
+.skip { position: absolute; top: .5rem; left: .5rem; padding: .5rem; background: white; transform: translateY(-160%); z-index: 1; }
+.skip:focus { transform: none; }
+@media (max-width: 50rem) {
+  .layout { grid-template-columns: minmax(0, 1fr); padding-top: 1.35rem; }
+  .masthead { padding-block: 2rem; }
+}
+@media (max-width: 31rem) {
+  .wrap { width: calc(100% - 1.5rem); }
+  .rubric, .group-body { padding: .85rem; }
+  summary { padding: .75rem; gap: .5rem; }
+  .group-number { min-width: 3.7rem; }
+  .status { max-width: 5rem; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#groups">跳至各組回饋</a>
+<header class="masthead">
+  <div class="wrap">
+    <p class="course">教學媒體與應用 · W11</p>
+    <h1>數位繪本設計與製作</h1>
+    <p class="subtitle">作品連結、七項檢核指標與各組回饋</p>
+  </div>
+</header>
+<main class="wrap layout">
+  <aside class="rubric" aria-labelledby="rubric-title">
+    <h2 id="rubric-title">檢核指標</h2>
+    <ol class="indicators">
+      <li><strong>貼近學生生活經驗</strong><span>情境、角色與衝突是否能連結低年級學生的日常。</span></li>
+      <li><strong>配合學生識字量</strong><span>用詞、句長與單頁文字量是否符合設定的閱讀階段。</span></li>
+      <li><strong>預測策略融入恰當</strong><span>揭曉前是否留有圖文線索，翻頁後是否能核對。</span></li>
+      <li><strong>繪本排版</strong><span>注音、字級、行距、斷句與圖文位置是否易讀。</span></li>
+      <li><strong>符合橋樑書要件</strong><span>圖文是否共同支援孩子由看圖、聽讀走向自己閱讀。</span></li>
+      <li><strong>圖文相符</strong><span>插圖的人物、動作、情緒與場景是否對應文字。</span></li>
+      <li><strong>SEL 學習目標是否明確</strong><span>共讀後，學生能在什麼情境下說出或做出什麼。</span></li>
+    </ol>
+    <p class="threshold"><strong>單頁文字量</strong><br>一年級上學期前、後 10 週約 10–30 字，下學期約 30–50 字。單次共讀約 10–15 分鐘。</p>
+  </aside>
+  <section aria-labelledby="groups">
+    <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
+      <details class="group" id="group-1">
+        <summary>
+          <span class="group-number">第 1 組</span>
+          <span class="group-heading"><span class="book-title">球球的溜滑梯大挑戰</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>優先精簡第 7 頁，並統一小安的外觀。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/19Hp5NWCw0lpOlQBlPCPBAPbOqq_RHPsQTYJ6oFzjSTY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 1 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>搶先玩溜滑梯的情境貼近下課生活，容易帶出排隊、等候與輪流的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁符合一下的文字量。第 7 頁約 56 字，可縮短老師陪伴的旁白，保留球球說出感受的對話。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>以第 7 頁為主要停問點。球球說「我也想先玩」後，問「她可以怎麼跟小安說？」再翻第 8 頁核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，正文約 17–19 pt。第 7 頁可把老師和球球的對話各自分行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫交代爭執，文字交代雙方各自的想法。可讓孩子試讀第 8 頁提出輪流的對話。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的抱胸、皺眉和獨坐呼應情緒變化。小安前後衣服顏色不同，建議統一，方便辨認。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在兩人都想先玩的情境中，用一句話提出輪流方式。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group pending" id="group-2">
+        <summary>
+          <span class="group-number">第 2 組</span>
+          <span class="group-heading"><span class="book-title">尚無提交紀錄</span></span>
+          <span class="status">尚未提交</span><span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <p class="empty-message">提交表中沒有可評閱的作品紀錄。</p>
+        </div>
+      </details>
+      <details class="group" id="group-3">
+        <summary>
+          <span class="group-number">第 3 組</span>
+          <span class="group-heading"><span class="book-title">小華的打招呼之旅</span><span class="group-meta">一年級上學期前 10 週</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>先減少旁白，把預測集中在遇見新同學的轉折。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1bAr_cRcua502Ppdb28ewO511OKE74VLWSLoTJrjR5uk/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 3 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>向家人、警衛、老師和新同學問好，貼近一年級開學初期的生活。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2–9 頁約 37–53 字，超過前 10 週的建議範圍。每頁可保留一句旁白與一句問候。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2–9 頁停問較密。可集中在第 8 頁，讓孩子看新同學低頭的樣子，猜小華接下來會說什麼。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有約 20 pt 的注音字型。第 9 頁圖上的問候小字約 11 pt，可放大。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>反覆出現的「早安」「你好」適合試讀。縮短旁白後，可讓孩子看圖辨人、讀文字確認問候方式。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>澆水壺、警衛制服和校門都能提示小華遇見誰。第 8 頁新同學低頭的動作也與文字相符。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能模擬遇見新同學時，先打招呼，再介紹自己的名字。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-4">
+        <summary>
+          <span class="group-number">第 4 組</span>
+          <span class="group-heading"><span class="book-title">今天的天空怎麼了</span><span class="group-meta">一年級上學期前 10 週</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>先把字量降到前 10 週適合的範圍，保留情緒最清楚的轉折。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1CFzJAJR8vV2MUcdFjvAB_JBDP0hBj71dO4VnAEWaH-o/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 4 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>天氣角色有想像力。插隊、朋友沒來一起玩、第一次參加比賽等情節能連結孩子的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 4、6、8、10 頁約 88–99 字，前 10 週的學生閱讀負擔較大。每頁可縮成一個情緒線索與一句關鍵對話。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>可先保留烏雲和小旋風兩段。第 4 頁問「如果你是烏雲，你會怎麼說自己為什麼生氣？」第 14 頁已揭曉小晴的心情，適合回顧。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，部分故事頁的旁白與對話較密。可把角色的關鍵一句話獨立成行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>天氣圖像能幫孩子辨認情緒。正文減量後，可用「我覺得＿＿，因為＿＿」作為反覆跟讀的句型。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>閃電和雨滴分別支援生氣、難過的理解。第 6 頁畫面重點是小雨滴，文字寫「雲朵說」，請統一說話角色。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於自我覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能選一個和角色相似的生活情境，用「我覺得＿＿，因為＿＿」說出感受與原因。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-5">
+        <summary>
+          <span class="group-number">第 5 組</span>
+          <span class="group-heading"><span class="book-title">我們一起玩好嘛?</span><span class="group-meta">一年級上學期後 10 週</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>保留已放在揭曉前的提問，再縮成一個主要問題。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1N73WCWkIw3CZtmiFbD2KB-RLKhIGeKVYo4cXFTPtP98/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 5 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>下課觀察昆蟲、想加入同學，以及同學對昆蟲有不同感受，都有校園生活的對應情境。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 19–29 字，符合上學期後 10 週。繪本內標第 5 頁約 36 字，可縮短旁白，保留邀請句。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>內標第 7 頁的停問時機恰當。可問「阿麥想一起玩，同學又怕蚱蜢，她可以怎麼做？」請孩子用前一頁的線索說理由。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>約 24 pt 的注音正文易讀。建議用繪本內頁碼標註預測頁，並統一封面與登記表的書名。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>插圖交代人物互動，短文補出兩方想法。可先看圖猜反應，再自己讀對話確認。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>內標第 3 頁同學後退的動作呼應文字。內標第 2 頁可補一個蚱蜢動作不便的線索，交代阿麥為何照顧牠。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於社會覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能分別說出阿麥和同學對蚱蜢的感受，再提出一種尊重雙方的做法。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group pending" id="group-6">
+        <summary>
+          <span class="group-number">第 6 組</span>
+          <span class="group-heading"><span class="book-title">小刺蝟的軟軟抱抱</span><span class="group-meta">一年級下學期</span></span>
+          <span class="status">待補繪本連結</span><span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <p class="empty-message">登記的預測頁碼是第4、5、7、10、16頁。收到可檢視的作品連結或 PDF 後，再補上評閱。</p>
+        </div>
+      </details>
+      <details class="group pending" id="group-7">
+        <summary>
+          <span class="group-number">第 7 組</span>
+          <span class="group-heading"><span class="book-title">尚無提交紀錄</span></span>
+          <span class="status">尚未提交</span><span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <p class="empty-message">提交表中沒有可評閱的作品紀錄。</p>
+        </div>
+      </details>
+      <details class="group pending" id="group-8">
+        <summary>
+          <span class="group-number">第 8 組</span>
+          <span class="group-heading"><span class="book-title">尚無提交紀錄</span></span>
+          <span class="status">尚未提交</span><span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <p class="empty-message">提交表中沒有可評閱的作品紀錄。</p>
+        </div>
+      </details>
+      <details class="group" id="group-9">
+        <summary>
+          <span class="group-number">第 9 組</span>
+          <span class="group-heading"><span class="book-title">艾倫的生氣天</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>保留火山比喻，並統一重搭城堡時的小宇造型。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1HqxmP58-0rw6qO5VQ2eSNkpd4pjk5mJWDdcN27XFP3g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 9 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>花了很久搭好的城堡被同伴碰倒，孩子容易理解艾倫為什麼又生氣又難過。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 5–7 頁約 37–45 字。結尾約 57 字，可縮成「先停一下、慢慢呼吸、說出感受」三個短句。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 5 頁用臉紅、握拳預測艾倫的下一步。第 7 頁可預測呼吸後拳頭如何變化，再翻頁核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音。第 7 頁可將老師的話和艾倫的呼吸動作分行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現情緒訊號，文字補出難過的原因。可讓學生自己讀第 8 頁艾倫說出的感受。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的火山呼應比喻。第 10–11 頁和艾倫一起搭城堡的同伴外觀與第 9 頁的小宇不同，建議統一。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能指出一個生氣時的身體訊號，並示範先停一下、慢慢吸氣和吐氣。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-10">
+        <summary>
+          <span class="group-number">第 10 組</span>
+          <span class="group-heading"><span class="book-title">小明和會說話的雨傘</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>把第 5 頁作為主要停問點，引導學生從圖文理解雨傘的需要。</p></div>
+            <a class="book-link" href="https://canva.link/lh604tgg6vk7kwc" target="_blank" rel="noopener noreferrer" aria-label="開啟第 10 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>害怕打雷、想找人陪伴，是孩子能理解並分享的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>「心跳得快快的」「慢慢吸氣」具體易懂。「安定自己」可換成「讓自己慢慢平靜下來」。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2、5 頁有清楚線索，下一頁也可核對。第 9 頁可聚焦問「小明最後可能對雨傘說什麼？」</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>第 5 頁的「陪／伴」被拆行，請按詞語和意思斷行，並固定「猜一猜」的呈現方式。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>插圖交代天氣和場景，對話交代雨傘為什麼害怕。可讓學生試讀一句小明安慰雨傘的話。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的雷雲和角落裡的雨傘對應兩種害怕。第 10 頁若畫的是小明家，可將「回家前」改為「回到家後」。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於社會覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能聽到同伴說「我好怕打雷」時，能用一句話回應對方的感受或提出陪伴。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-11">
+        <summary>
+          <span class="group-number">第 11 組</span>
+          <span class="group-heading"><span class="book-title">今天沒有人跟我玩</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>第 4 頁先看圖猜心情，第 7 頁再演練怎麼開口。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1f_AaJ1prrcg_dpzsGPVebFXQyXpA1GE9Eyix_Dtcl7g/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 11 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>想加入同學遊戲卻不知道怎麼開口，貼近低年級下課經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁文字量適中。「友善表達自己的需求」可改成「好好說出你想做什麼」。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 3、6 頁適合猜米米的行動與說法。第 4 頁正文已寫出她的心情，可先看圖判斷，再讀文字核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 20–22 pt，有注音。可固定「想一想」的位置，方便辨認停問點。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現米米和同學的距離與動作，文字示範怎麼開口。第 7 頁的邀請句適合孩子自己讀。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁低頭、縮起身體呼應孤單與難過。第 9 頁三人一起收拾玩具，讓孩子看得見合作。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬下課情境中走近同伴，用一句友善的話詢問能否加入遊戲。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-12">
+        <summary>
+          <span class="group-number">第 12 組</span>
+          <span class="group-heading"><span class="book-title">刺蝟小刺的「魔法口袋」</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>把第 7–8 頁串成「預測、翻頁核對、共讀後演練」。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1gW0SGJXekpXQsgrPQBFWxD8aJNdxMa9_ue-5DFk26Yo/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 12 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>積木被撞倒、誤會對方是故意的，以及事後道歉，都是孩子能理解的班級衝突。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁約 30–50 字。第 8 頁可讓插圖交代小刺去找阿噗的動作，正文保留道歉的話。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 7 頁練完三步驟後先問「小刺會去找誰？會說什麼？」請學生用前文線索說理由，再翻第 8 頁核對。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，多數約 18 pt。步驟卡部分文字可略放大，第 8 頁的旁白與道歉對話可分行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現積木倒下與角色反應，文字交代誤會與調節步驟。可讓孩子自己讀一個步驟或一句道歉。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁豎起的背刺、散落的積木和阿噗後退的動作都呼應文字。第 7 頁可指著圖示依序練習。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬積木被撞倒的情境中，依序示範深呼吸、數到五，並用一句話說出感受。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-13">
+        <summary>
+          <span class="group-number">第 13 組</span>
+          <span class="group-heading"><span class="book-title">捷克與小蚯蚓的回家路</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>保留第 6 頁以線索判斷的提問，補畫第 8 頁的關鍵動作。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1aF_5DyspK0wBZoPOUJ6a0oGT3NwNdsz3m2SQNcTIios/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 13 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>雨後在公園發現蚯蚓，能連結孩子觀察校園或公園裡小動物的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、8 頁約 55 字以上，可減少重複描述，保留「怕乾」「用力抓會弄傷牠」等關鍵線索。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁讓學生根據「不能用手硬抓」來想工具，再翻第 7 頁確認捷克的選擇。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音，提問已放入備忘稿。第 2 頁的「他覺得」可與後文排成完整語意單位。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫讓學生看見捷克用了什麼，文字讓學生讀到他為什麼這樣做。可請學生自己找出一句支持選擇的線索。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 7–8 頁看得出葉子是運送工具。第 8 頁可加小圖畫出樹枝如何引導蚯蚓爬上葉子。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於負責任的決定。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能比較兩種幫助蚯蚓的做法，選出一種並說明可能的影響。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-14">
+        <summary>
+          <span class="group-number">第 14 組</span>
+          <span class="group-heading"><span class="book-title">晴晴的彩色心情怪獸</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>停問時保留有線索的圖畫，並讓第 10 頁的補救動作更清楚。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1UUldLmThDdaTecxz-KCJ7qx8fAzvH513yb4Dps6NWu8/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 14 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>心愛的小卡被同學不小心弄濕，能帶出責怪、誤會和事後修復的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數故事頁約 34–40 字。「慌張」可搭配小宇急著擦桌子的動作理解。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 8、11 頁都在情節揭曉之前。可分別請學生依小宇紅眼和拿衛生紙的線索，猜晴晴接下來會怎麼做。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，約 24 pt。可把完整問句移入教師備忘稿，讓學生停在有線索的故事畫面。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>彩色怪獸呈現情緒變化，對話補充衝突原因。可讓學生接著讀晴晴怎麼讓自己平靜下來。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、9 頁紅色怪獸由大變小，和情緒變化相呼應。第 10 頁可再凸顯衛生紙、桌面的水與擦拭動作。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬小卡被弄濕的情境中，先停一下、慢慢呼吸三次，再開口回應。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-15">
+        <summary>
+          <span class="group-number">第 15 組</span>
+          <span class="group-heading"><span class="book-title">星星森林的秘密</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>縮短第 2、6 頁的句子，並讓兩個角色如何合作更清楚。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1vBJcRch0Odg7c4g9K1ljljLNoGy3xEHwxg_LTO_mSoI/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="開啟第 15 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>奇幻場景可從「發現同伴不安時能怎麼幫忙」切入，讓孩子連結自己的經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>第 2、6 頁句子偏長。「眼神充滿不安」可具體寫成「牠縮在草叢裡，一直看著小禾」。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 2 頁可從叫聲和神情猜小禾怎麼靠近狐狸，第 6 頁可從樹變暗、寶石不見猜兩人接下來會去哪裡找。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>文字有注音，並以半透明底框與背景區隔。可縮短長行、放寬行距。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫交代場景與人物，文字提供寶石失蹤等線索。可讓學生先讀一兩句，再在圖中指出對應線索。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、8 頁的星星樹由暗到亮。第 2 頁可用草葉遮住狐狸部分身體，並加強警戒神情，配合躲藏的文字。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>需補強，可聚焦於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能說明小禾和小狐狸各自怎麼幫忙，並在兩人一組尋找線索的任務中分工、互相回報。</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+      <details class="group" id="group-16">
+        <summary>
+          <span class="group-number">第 16 組</span>
+          <span class="group-heading"><span class="book-title">小白兔的情緒魔法</span><span class="group-meta">一年級下學期</span></span>
+          <span class="toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="group-body">
+          <div class="priority">
+            <div><strong>優先修訂</strong><p>第 8 頁畫出正在發生的對話，結尾保留可讓孩子演練的句型。</p></div>
+            <a class="book-link" href="https://docs.google.com/presentation/d/1U74vP2tJ2CNaCFZ8yDFH9PKt7rekvvZQYJo4SLFFL98/edit?slide=id.p#slide=id.p" target="_blank" rel="noopener noreferrer" aria-label="開啟第 16 組繪本（新分頁）">開啟繪本</a>
+          </div>
+          <dl class="review">
+          <div class="review-item"><dt>貼近學生生活經驗</dt><dd><p>玩扮家家酒時都想拿同一把茶壺，孩子容易代入，也能連結借用與輪流的生活經驗。</p></dd></div>
+          <div class="review-item"><dt>配合學生識字量</dt><dd><p>多數頁接近一下的文字量。「豁然開朗」可改成「小惠懂了」，「免子」請修正為「兔子」。</p></dd></div>
+          <div class="review-item"><dt>預測策略融入恰當</dt><dd><p>第 6 頁可用小美跑開的線索，猜小惠接下來會怎麼做。第 9 頁可先練說輪流句，再猜小美會怎麼回應。</p></dd></div>
+          <div class="review-item"><dt>繪本排版</dt><dd><p>多數正文約 17 pt，有注音。請刪除第 10 頁的「文字在這裡」，並將道歉和輪流請求分行。</p></dd></div>
+          <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>畫面支援玩具衝突與角色動作，對話交代如何修復關係。第 9、10 頁適合讓孩子自己讀出請求與道歉。</p></dd></div>
+          <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的拿茶壺、拍手臂呼應文字。第 8 頁可畫小白兔正在和小惠說話，用小框保留搶茶壺的回想。</p></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在兩人想玩同一個玩具時，先示範一次慢呼吸，再說「我也想玩，我們可以輪流嗎？」</p></div></dd></div>
+          </dl>
+        </div>
+      </details>
+  </section>
+</main>
+</body>
+</html>
