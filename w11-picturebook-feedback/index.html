@@ -127,8 +127,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   </aside>
   <section aria-labelledby="groups">
     <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
-    <div class="submission-guide">
-      展開自己的組別即可填寫與儲存，無需帳號密碼。補交連結與自填內容會顯示於此頁，知道網址的人皆可查看及編輯。請只編輯自己的組別，避免填入姓名等個人資料。補交前請把繪本設為知道連結者可檢視。
+    <div class="submission-guide" hidden>
       <span id="submission-global-status" role="status"></span>
       <button id="submission-retry" type="button" hidden>重新讀取</button>
     </div>
@@ -589,6 +588,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   }
 
   async function loadAll() {
+    globalStatus.parentElement.hidden = false;
     retry.hidden = true;
     globalStatus.textContent = '正在讀取各組已儲存內容…';
     try {
@@ -605,6 +605,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
         state.save.disabled = false;
       }
       globalStatus.textContent = '';
+      globalStatus.parentElement.hidden = true;
     } catch {
       globalStatus.textContent = '暫時無法讀取各組自填內容。';
       retry.hidden = false;
