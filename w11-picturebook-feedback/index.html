@@ -96,7 +96,10 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 .submission-editor button, .submission-guide button { background: var(--teal); border: 1px solid var(--teal); color: var(--white); border-radius: .36rem; padding: .42rem .7rem; font: inherit; font-weight: 700; cursor: pointer; }
 .submission-editor button:disabled { opacity: .55; cursor: default; }
 .submission-editor button:focus-visible, .submission-guide button:focus-visible { outline: 3px solid #a2610d; outline-offset: 3px; }
-.submission-status, .submission-date { color: var(--muted); font-size: .93rem; }
+.submission-status, .submission-date, .book-upload-date { color: var(--muted); font-size: .93rem; }
+.book-upload-date { display: block; margin-top: .3rem; }
+.book-upload-date[hidden], .book-link[hidden] { display: none; }
+.submission-form .book-upload-action { margin: -.2rem 0 .9rem; }
 .submission-preview { margin: .65rem 0 .2rem; }
 .submission-preview div { margin: .48rem 0; }
 .submission-preview dt { color: var(--teal); font-weight: 750; }
@@ -446,7 +449,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
     ['activity', '延伸活動建議'],
   ];
   const dateFormat = new Intl.DateTimeFormat('zh-TW', {
-    dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Taipei',
+    dateStyle: 'medium', timeStyle: 'medium', timeZone: 'Asia/Taipei',
   });
   const states = [];
   const globalStatus = document.querySelector('#submission-global-status');
@@ -462,12 +465,14 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   function renderSaved(state, record) {
     state.record = record;
     state.preview.replaceChildren();
-    if (state.requiresBook && record.bookUrl) {
-      const link = create('a', '開啟補交的繪本', 'book-link');
-      link.href = record.bookUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      state.preview.append(link);
+    const bookUrl = record.bookUrl || state.originalBookUrl;
+    state.bookLink.hidden = !bookUrl;
+    state.bookDate.hidden = !bookUrl;
+    if (bookUrl) {
+      state.bookLink.href = bookUrl;
+      state.bookDate.textContent = record.bookUpdatedAt
+        ? '最後上傳時間（臺灣）' + '　' + dateFormat.format(new Date(record.bookUpdatedAt))
+        : '最後上傳時間未記錄';
     }
     const list = create('dl', '', 'submission-preview');
     for (const [name, label] of fields) {
@@ -477,12 +482,12 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
       list.append(row);
     }
     if (list.childElementCount) state.preview.append(list);
-    if (record.updatedAt) {
-      state.preview.append(create('p', '最後儲存 ' + dateFormat.format(new Date(record.updatedAt)), 'submission-date'));
+    if (list.childElementCount && record.updatedAt) {
+      state.preview.append(create('p', '學習設計最後儲存 ' + dateFormat.format(new Date(record.updatedAt)), 'submission-date'));
     } else {
       state.preview.append(create('p', '這組尚未儲存自填內容。', 'submission-date'));
     }
-    if (state.requiresBook) {
+    if (state.pendingReview) {
       state.group.querySelector(':scope > summary .status').textContent = record.bookUrl ? '已補交，待評閱' : state.originalStatus;
       state.group.querySelector('.empty-message').hidden = Boolean(record.bookUrl);
       if (state.originalTitle === '尚無提交紀錄') {
@@ -493,7 +498,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 
   function loadInputs(state) {
     for (const [name, input] of Object.entries(state.inputs)) {
-      input.value = state.record[name] || '';
+      input.value = state.record[name] || (name === 'bookUrl' ? state.originalBookUrl : '');
     }
     state.baseRevision = state.record.revision;
     state.loadNew.hidden = true;
@@ -501,26 +506,30 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 
   for (const group of document.querySelectorAll('details.group')) {
     const number = Number(group.id.replace('group-', ''));
-    const requiresBook = group.classList.contains('pending');
+    const pendingReview = group.classList.contains('pending');
     const originalStatus = group.querySelector(':scope > summary .status')?.textContent;
     const originalTitle = group.querySelector('.book-title').textContent;
     const section = create('section', '', 'submission-editor');
     const preview = create('div');
     const panel = create('details', '', 'submission-panel');
-    const summary = create('summary', requiresBook ? '填寫或修改繪本連結與學習設計' : '填寫或修改學習設計');
+    const summary = create('summary', '上傳繪本連結或填寫學習設計');
     const form = create('form', '', 'submission-form');
+    form.noValidate = true;
     const inputs = {};
     const status = create('p', '', 'submission-status');
     status.setAttribute('role', 'status');
     const actions = create('div', '', 'submission-actions');
-    const save = create('button', '儲存');
+    const upload = create('button', '上傳繪本連結', 'book-upload-action');
+    upload.type = 'button';
+    upload.disabled = true;
+    const save = create('button', '儲存學習設計');
     save.type = 'submit';
     save.disabled = true;
     const loadNew = create('button', '將表單換成最新已儲存內容');
     loadNew.type = 'button';
     loadNew.hidden = true;
 
-    const inputFields = requiresBook ? [['bookUrl', '繪本連結'], ...fields] : fields;
+    const inputFields = [['bookUrl', '繪本連結'], ...fields];
     for (const [name, label] of inputFields) {
       const wrapper = create('label', label);
       const input = create(name === 'bookUrl' ? 'input' : 'textarea');
@@ -536,35 +545,57 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
       inputs[name] = input;
       wrapper.append(input);
       form.append(wrapper);
+      if (name === 'bookUrl') form.append(upload);
     }
     actions.append(save, loadNew);
     form.append(actions, status);
     panel.append(summary, form);
-    section.append(create('h3', '各組自填'), preview, panel);
+    const existingBookLink = group.querySelector('.priority a.book-link');
+    const originalBookUrl = existingBookLink?.getAttribute('href') || '';
+    const bookLink = existingBookLink || create('a', '開啟補交的繪本', 'book-link');
+    bookLink.target = '_blank';
+    bookLink.rel = 'noopener noreferrer';
+    bookLink.hidden = !originalBookUrl;
+    const bookDate = create('span', '最後上傳時間未記錄', 'book-upload-date');
+    bookDate.hidden = !originalBookUrl;
+    const book = create('div');
+    if (existingBookLink) existingBookLink.before(book);
+    book.append(bookLink, bookDate);
+    const heading = create('h3', '各組自填');
+    section.append(heading);
+    if (!existingBookLink) section.append(book);
+    section.append(preview, panel);
     group.querySelector('.group-body').append(section);
-    const state = { group, number, requiresBook, originalStatus, originalTitle, inputs, preview, save, loadNew, status, record: null };
+    const state = { group, number, pendingReview, originalStatus, originalTitle, originalBookUrl, bookLink, bookDate, inputs, preview, save, upload, loadNew, record: null };
     states.push(state);
 
     loadNew.addEventListener('click', () => {
       loadInputs(state);
-      save.disabled = false;
+      save.disabled = upload.disabled = false;
       status.textContent = '已將表單換成最新內容，可以繼續修改。';
     });
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    async function submit(action) {
       if (!state.record || save.disabled) return;
-      const edited = Object.fromEntries(Object.entries(inputs).map(([name, input]) => [name, input.value]));
-      save.disabled = true;
+      const isUpload = action === 'uploadBook';
+      if (isUpload && !inputs.bookUrl.value.trim()) {
+        status.textContent = '請先貼上繪本連結。';
+        inputs.bookUrl.focus();
+        return;
+      }
+      if (isUpload && !inputs.bookUrl.reportValidity()) return;
+      const names = isUpload ? ['bookUrl'] : fields.map(([name]) => name);
+      const edited = Object.fromEntries(names.map(name => [name, inputs[name].value]));
+      save.disabled = upload.disabled = true;
       loadNew.disabled = true;
       for (const input of Object.values(inputs)) input.disabled = true;
-      status.textContent = '儲存中…';
+      status.textContent = isUpload ? '上傳連結中…' : '儲存中…';
       try {
         const result = await fetch(api + '/' + number, {
           method: 'PUT',
           credentials: 'omit',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...edited, revision: state.baseRevision }),
+          body: JSON.stringify({ action, ...edited, revision: state.baseRevision }),
         });
         const data = await result.json();
         if (result.status === 409 && data.record) {
@@ -575,15 +606,22 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
         }
         if (!result.ok) throw new Error(data.error || '暫時無法儲存。');
         renderSaved(state, data.record);
-        loadInputs(state);
-        status.textContent = '已儲存，換裝置也能查看。';
+        state.baseRevision = data.record.revision;
+        for (const name of names) inputs[name].value = data.record[name];
+        status.textContent = isUpload ? '繪本連結已上傳。' : '學習設計已儲存，換裝置也能查看。';
       } catch (error) {
         status.textContent = (error instanceof TypeError ? '連線失敗，請稍後重試。' : error.message) + ' 表單仍保留輸入內容。';
       } finally {
-        save.disabled = !loadNew.hidden;
+        save.disabled = upload.disabled = !loadNew.hidden;
         for (const input of Object.values(inputs)) input.disabled = false;
         loadNew.disabled = false;
       }
+    }
+
+    upload.addEventListener('click', () => submit('uploadBook'));
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submit('saveSel');
     });
   }
 
@@ -602,7 +640,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
         renderSaved(state, record);
         loadInputs(state);
         for (const input of Object.values(state.inputs)) input.disabled = false;
-        state.save.disabled = false;
+        state.save.disabled = state.upload.disabled = false;
       }
       globalStatus.textContent = '';
       globalStatus.parentElement.hidden = true;
