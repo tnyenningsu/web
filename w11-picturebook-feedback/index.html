@@ -69,7 +69,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 .review-item dt { font-weight: 800; color: var(--teal); }
 .review-item dd { margin: .2rem 0 0; }
 .outcome { border-left: 3px solid #5e9a8b; padding: .45rem .7rem; margin-top: .55rem; background: var(--teal-soft); }
-.outcome strong { font-size: .94rem; }
+.outcome strong { font-size: .94rem; color: var(--teal); }
+.sel-plan { display: grid; gap: .65rem; padding: .7rem .85rem; }
+.sel-plan > div + div { border-top: 1px solid #cadfd7; padding-top: .65rem; }
+.sel-plan p { margin-top: .12rem; }
+.sel-plan b { color: var(--teal); }
 .empty-message { margin: 0; color: var(--muted); }
 .skip { position: absolute; top: .5rem; left: .5rem; padding: .5rem; background: white; transform: translateY(-160%); z-index: 1; }
 .skip:focus { transform: none; }
@@ -105,7 +109,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
       <li><strong>繪本排版</strong><span>注音、字級、行距、斷句與圖文位置是否易讀。</span></li>
       <li><strong>符合橋樑書要件</strong><span>圖文是否共同支援孩子由看圖、聽讀走向自己閱讀。</span></li>
       <li><strong>圖文相符</strong><span>插圖的人物、動作、情緒與場景是否對應文字。</span></li>
-      <li><strong>SEL 學習目標是否明確</strong><span>共讀後，學生能在什麼情境下說出或做出什麼。</span></li>
+      <li><strong>SEL 學習目標是否明確</strong><span>以可衡量的目標、預期學習成果與延伸活動，檢核學生共讀後能說出或做出什麼。</span></li>
     </ol>
     <p class="threshold"><strong>單頁文字量</strong><br>一年級上學期前、後 10 週約 10–30 字，下學期約 30–50 字。單次共讀約 10–15 分鐘。</p>
   </aside>
@@ -129,7 +133,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，正文約 17–19 pt。第 7 頁可把老師和球球的對話各自分行。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫交代爭執，文字交代雙方各自的想法。可讓孩子試讀第 8 頁提出輪流的對話。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的抱胸、皺眉和獨坐呼應情緒變化。小安前後衣服顏色不同，建議統一，方便辨認。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在兩人都想先玩的情境中，用一句話提出輪流方式。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬兩人同時想玩溜滑梯時，能用一句話說清楚誰先玩、何時換人。</p></div>
+              <div><strong>預期學習成果</strong><p>學生說出可執行的輪流約定，例如「你先溜一次，溜完換我」，並在演練中照約定交換一次。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>練習與他人互動</b>　兩人演出搶先玩溜滑梯的情境，先用一句話談好順序，再用拍手代表玩完一次，交換角色重演。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -161,7 +169,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文有約 20 pt 的注音字型。第 9 頁圖上的問候小字約 11 pt，可放大。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>反覆出現的「早安」「你好」適合試讀。縮短旁白後，可讓孩子看圖辨人、讀文字確認問候方式。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>澆水壺、警衛制服和校門都能提示小華遇見誰。第 8 頁新同學低頭的動作也與文字相符。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能模擬遇見新同學時，先打招呼，再介紹自己的名字。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬遇到新同學時，能依序完成問候和自我介紹，共說出兩句話。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能說「你好！我叫＿＿。」同伴能聽出問候和名字。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>與家人分享</b>　回家分享小華怎麼認識新同學，請家人扮新同學。練完問候和自我介紹後，交換角色再說一次。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -183,7 +195,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>有注音，部分故事頁的旁白與對話較密。可把角色的關鍵一句話獨立成行。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>天氣圖像能幫孩子辨認情緒。正文減量後，可用「我覺得＿＿，因為＿＿」作為反覆跟讀的句型。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>閃電和雨滴分別支援生氣、難過的理解。第 6 頁畫面重點是小雨滴，文字寫「雲朵說」，請統一說話角色。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於自我覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能選一個和角色相似的生活情境，用「我覺得＿＿，因為＿＿」說出感受與原因。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於自我覺察。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>看完一位天氣角色的情境後，能說出一個相似的生活事件，並用一句話說出自己的情緒與原因。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能交代情緒和事件，例如「我很生氣，因為有人排隊時插到我前面。」</p></div>
+              <div><strong>延伸活動建議</strong><p><b>繪畫</b>　畫一個和自己有關的生活情境，再畫一種天氣代表心情。指著圖口述「我覺得＿＿，因為＿＿」，教師可代記。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -205,7 +221,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>約 24 pt 的注音正文易讀。建議用繪本內頁碼標註預測頁，並統一封面與登記表的書名。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>插圖交代人物互動，短文補出兩方想法。可先看圖猜反應，再自己讀對話確認。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>內標第 3 頁同學後退的動作呼應文字。內標第 2 頁可補一個蚱蜢動作不便的線索，交代阿麥為何照顧牠。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於社會覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能分別說出阿麥和同學對蚱蜢的感受，再提出一種尊重雙方的做法。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於社會覺察。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>聽完阿麥和同學的對話後，能說出雙方各一種感受或想法，並提出一個尊重同學界線的做法。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能說明「阿麥想一起玩，同學怕蚱蜢」，並提出做法，例如「想看的人可以站遠一點，不想看的人也可以一起做別的事」。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>寫下自己為主角的造句</b>　以自己遇到朋友怕某種動物為情境，先口說再寫或用注音完成「我喜歡＿＿。朋友會怕，我可以＿＿。」</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -257,7 +277,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音。第 7 頁可將老師的話和艾倫的呼吸動作分行。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現情緒訊號，文字補出難過的原因。可讓學生自己讀第 8 頁艾倫說出的感受。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的火山呼應比喻。第 10–11 頁和艾倫一起搭城堡的同伴外觀與第 9 頁的小宇不同，建議統一。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能指出一個生氣時的身體訊號，並示範先停一下、慢慢吸氣和吐氣。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬積木被碰倒時，能辨認一個生氣的身體訊號，再依序示範暫停、慢慢吸氣、慢慢吐氣。</p></div>
+              <div><strong>預期學習成果</strong><p>教師可看到學生先指出一個訊號，例如握拳，再做一次完整調節動作。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>動作表演</b>　兩人一組玩「火山定格」。一人演出皺眉或握拳，再鬆手、停一下、慢呼吸。另一人指出看到的身體變化，最後交換。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -279,7 +303,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>第 5 頁的「陪／伴」被拆行，請按詞語和意思斷行，並固定「猜一猜」的呈現方式。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>插圖交代天氣和場景，對話交代雨傘為什麼害怕。可讓學生試讀一句小明安慰雨傘的話。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 5 頁的雷雲和角落裡的雨傘對應兩種害怕。第 10 頁若畫的是小明家，可將「回家前」改為「回到家後」。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於社會覺察。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能聽到同伴說「我好怕打雷」時，能用一句話回應對方的感受或提出陪伴。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於社會覺察。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>聽到同伴說自己害怕時，能用一句話同時回應對方的感受，並提出一種陪伴方式。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能說「你有點怕，我可以坐在你旁邊陪你嗎？」或用其他包含理解與陪伴的說法。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>與家人分享</b>　指著第 5 頁的圖說出雨傘的兩種害怕，再請家人扮雨傘。練習說一句陪伴的話，並聽家人說哪一句讓人感覺被理解。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -301,7 +329,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 20–22 pt，有注音。可固定「想一想」的位置，方便辨認停問點。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現米米和同學的距離與動作，文字示範怎麼開口。第 7 頁的邀請句適合孩子自己讀。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁低頭、縮起身體呼應孤單與難過。第 9 頁三人一起收拾玩具，讓孩子看得見合作。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬下課情境中走近同伴，用一句友善的話詢問能否加入遊戲。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於人際關係技巧。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>在模擬下課遊戲中，能用一句友善的請求詢問能否加入，並等對方回應。</p></div>
+              <div><strong>預期學習成果</strong><p>教師可聽到學生說「我也想一起玩，可以嗎？」或同義句，並觀察到學生開口後停下來等待。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>練習與他人互動</b>　三人一組，兩人玩球、一人練習加入。每人輪一次想加入的角色。同伴可以答應或請他等下一輪，讓孩子練習等待回應。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -323,7 +355,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，多數約 18 pt。步驟卡部分文字可略放大，第 8 頁的旁白與道歉對話可分行。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫呈現積木倒下與角色反應，文字交代誤會與調節步驟。可讓孩子自己讀一個步驟或一句道歉。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 4 頁豎起的背刺、散落的積木和阿噗後退的動作都呼應文字。第 7 頁可指著圖示依序練習。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬積木被撞倒的情境中，依序示範深呼吸、數到五，並用一句話說出感受。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬積木被撞倒時，能依序完成深呼吸、數到五、用一句話說出感受，共三步。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能依序做完三步，並說出有情緒詞的句子，例如「我好生氣，因為城堡倒了。」</p></div>
+              <div><strong>延伸活動建議</strong><p><b>動作表演</b>　兩人分別扮小刺和阿噗。教師用口語提示積木倒了，扮小刺的學生照三步驟卡演一次，再交換角色重練。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -345,7 +381,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文約 18 pt，有注音，提問已放入備忘稿。第 2 頁的「他覺得」可與後文排成完整語意單位。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫讓學生看見捷克用了什麼，文字讓學生讀到他為什麼這樣做。可請學生自己找出一句支持選擇的線索。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 7–8 頁看得出葉子是運送工具。第 8 頁可加小圖畫出樹枝如何引導蚯蚓爬上葉子。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於負責任的決定。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能比較兩種幫助蚯蚓的做法，選出一種並說明可能的影響。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>可聚焦於負責任的決定。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>面對幫小蚯蚓回到草地的情境，能在直接抓和用葉子接兩種做法中選一種，並說出一個可能的後果。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能說「我選用葉子接，因為用手抓得太用力可能會弄傷牠」，或依故事線索提出合理理由。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>繪畫</b>　把兩種做法畫成兩格，在選擇的做法旁打勾，再指著自己的畫說明「我選＿＿，因為＿＿」。可用口頭表達代替寫字。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -367,7 +407,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>正文有注音，約 24 pt。可把完整問句移入教師備忘稿，讓學生停在有線索的故事畫面。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>彩色怪獸呈現情緒變化，對話補充衝突原因。可讓學生接著讀晴晴怎麼讓自己平靜下來。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、9 頁紅色怪獸由大變小，和情緒變化相呼應。第 10 頁可再凸顯衛生紙、桌面的水與擦拭動作。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在模擬小卡被弄濕的情境中，先停一下、慢慢呼吸三次，再開口回應。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬小卡被同學弄濕時，能先停一下、慢慢呼吸三次，再說一句話表達感受或提出做法。</p></div>
+              <div><strong>預期學習成果</strong><p>教師可觀察到學生先調節再開口，例如呼吸三次後說「我有點難過，我們一起把它擦乾，好嗎？」</p></div>
+              <div><strong>延伸活動建議</strong><p><b>寫下自己為主角的造句</b>　用自己的小卡或文具想像相似情境，先演再寫或用注音完成「我的＿＿被弄濕了，我先＿＿，再說＿＿。」</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -389,7 +433,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>文字有注音，並以半透明底框與背景區隔。可縮短長行、放寬行距。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>圖畫交代場景與人物，文字提供寶石失蹤等線索。可讓學生先讀一兩句，再在圖中指出對應線索。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 6、8 頁的星星樹由暗到亮。第 2 頁可用草葉遮住狐狸部分身體，並加強警戒神情，配合躲藏的文字。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>需補強，可聚焦於人際關係技巧。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能說明小禾和小狐狸各自怎麼幫忙，並在兩人一組尋找線索的任務中分工、互相回報。</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>需補強，可聚焦於人際關係技巧。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>完成兩人一組的找線索任務時，能各自承擔一項工作，並向同伴回報至少一個發現。</p></div>
+              <div><strong>預期學習成果</strong><p>同伴能說出彼此的分工，並實際各回報一次，例如「我看圖找到星星樹」「我從文字找到寶石不見了的線索」。</p></div>
+              <div><strong>延伸活動建議</strong><p><b>練習與他人互動</b>　一人看插圖、一人找文字，共同找出寶石失蹤的線索。找到後輪流回報，再交換角色查看下一頁。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
@@ -411,7 +459,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
           <div class="review-item"><dt>繪本排版</dt><dd><p>多數正文約 17 pt，有注音。請刪除第 10 頁的「文字在這裡」，並將道歉和輪流請求分行。</p></dd></div>
           <div class="review-item"><dt>符合橋樑書要件</dt><dd><p>畫面支援玩具衝突與角色動作，對話交代如何修復關係。第 9、10 頁適合讓孩子自己讀出請求與道歉。</p></dd></div>
           <div class="review-item"><dt>圖文相符</dt><dd><p>第 5–6 頁的拿茶壺、拍手臂呼應文字。第 8 頁可畫小白兔正在和小惠說話，用小框保留搶茶壺的回想。</p></dd></div>
-          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome"><strong>共讀後的預期行為</strong><p>學生能在兩人想玩同一個玩具時，先示範一次慢呼吸，再說「我也想玩，我們可以輪流嗎？」</p></div></dd></div>
+          <div class="review-item"><dt>SEL 學習目標是否明確</dt><dd><p>明確。屬於自我管理。</p><div class="outcome sel-plan" aria-label="SEL 學習設計">
+              <div><strong>對應可衡量的學習目標</strong><p>模擬兩人想拿同一個玩具時，能先做一次慢呼吸，再用一句話說出自己的需求並提出輪流。</p></div>
+              <div><strong>預期學習成果</strong><p>學生能先呼吸，再說出同時包含需求與做法的一句話，例如「我也想玩，我們可以輪流嗎？」</p></div>
+              <div><strong>延伸活動建議</strong><p><b>動作表演</b>　兩人用玩具或紙卡演出同時想玩的情境，輪流扮小惠和小美。提醒學生以口語提出輪流，再讓兩人各玩一次。</p></div>
+            </div></dd></div>
           </dl>
         </div>
       </details>
