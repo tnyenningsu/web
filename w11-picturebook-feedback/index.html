@@ -105,6 +105,12 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
 .submission-preview dt { color: var(--teal); font-weight: 750; }
 .submission-preview dd { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .submission-preview .book-link { display: inline-block; margin-bottom: .25rem; white-space: normal; }
+
+.association-guide { padding: .7rem .85rem; margin: .75rem 0; border: 1px solid var(--line); border-radius: .55rem; font-size: .94rem; }
+.association-guide strong { color: var(--teal); }
+.association-guide button { font: inherit; }
+.association-editor .submission-form select { display: block; width: 100%; margin-top: .22rem; padding: .55rem .62rem; border: 1px solid #97ada5; border-radius: .3rem; background: var(--white); color: var(--ink); font: inherit; }
+.association-editor .submission-preview dd { overflow-wrap: anywhere; }
 </style>
 </head>
 <body>
@@ -130,6 +136,11 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   </aside>
   <section aria-labelledby="groups">
     <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
+    <div class="association-guide">
+      <strong>聯想策略互評</strong>　展開自己的組別，查看指定對象。選對方繪本的一頁，設計提問，讓孩子把圖文和生活經驗或已知事物連起來，再帶孩子回到繪本。若對方尚未補交，可在作品出現後再完成設計。<br>例：看見雨傘圖，請孩子說說放學遇到下雨的經驗，再回到圖上找角色帶傘的原因。
+      <span id="association-status" role="status"></span>
+      <button id="association-retry" type="button" hidden>重新讀取互評</button>
+    </div>
     <div class="submission-guide" hidden>
       <span id="submission-global-status" role="status"></span>
       <button id="submission-retry" type="button" hidden>重新讀取</button>
@@ -651,6 +662,172 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   }
   retry.addEventListener('click', loadAll);
   loadAll();
+
+  const associationApi = api.replace(/submissions$/, 'associations');
+  const designFields = [
+    ['page', '設計頁碼', 40, '例如：第 5 頁'],
+    ['clue', '聯想線索', 500, '你會指著哪一個標題、插圖或詞語？'],
+    ['prompt', '教師提問', 500, '例如：看到這個，你想到家裡或出門時的什麼？'],
+    ['childResponse', '孩子可能的反應', 500, '孩子可能說什麼？也可以用短詞、畫圖或動作表達。'],
+    ['returnToText', '教師接話與理解重點', 750, '教師怎麼把孩子的聯想接回圖文？孩子因此能讀懂什麼？'],
+  ];
+  const associationStatus = document.querySelector('#association-status');
+  const associationRetry = document.querySelector('#association-retry');
+
+  async function loadAssociationTask() {
+    associationRetry.hidden = true;
+    associationStatus.textContent = '正在讀取指定組別…';
+    try {
+      const result = await fetch(associationApi, { cache: 'no-store', credentials: 'omit' });
+      if (!result.ok) throw new Error('無法讀取互評。');
+      const { assignments, types, records } = await result.json();
+      if (assignments.length !== states.length || new Set(assignments).size !== states.length) {
+        throw new Error('無法讀取指定組別。');
+      }
+      const previews = new Map();
+
+      function showReceived(author, record) {
+        const area = previews.get(assignments[author - 1]);
+        area.replaceChildren();
+        if (!record.type) {
+          area.append(create('p', '尚未收到聯想策略建議。', 'submission-date'));
+          return;
+        }
+        const list = create('dl', '', 'submission-preview');
+        for (const [name, label] of [['type', '聯想方式'], ...designFields]) {
+          const row = create('div');
+          row.append(create('dt', label), create('dd', record[name]));
+          list.append(row);
+        }
+        area.append(list);
+        area.append(create('p', '最後儲存　' + dateFormat.format(new Date(record.updatedAt)), 'submission-date'));
+      }
+
+      for (const state of states) {
+        const target = assignments[state.number - 1];
+        const reviewer = assignments.indexOf(state.number) + 1;
+        const section = create('section', '', 'submission-editor association-editor');
+        const assignment = create('p');
+        assignment.append(create('strong', '指定設計對象：第 ' + target + ' 組'), document.createTextNode('　'));
+        const jump = create('a', '查看第 ' + target + ' 組作品');
+        jump.href = '#group-' + target;
+        jump.addEventListener('click', () => {
+          const targetGroup = document.getElementById('group-' + target);
+          targetGroup.open = true;
+          targetGroup.querySelector('summary').focus({ preventScroll: true });
+        });
+        assignment.append(jump);
+
+        const panel = create('details', '', 'submission-panel');
+        panel.append(create('summary', '填寫給第 ' + target + ' 組的聯想策略'));
+        const form = create('form', '', 'submission-form');
+        const inputs = {};
+        const typeLabel = create('label', '聯想方式');
+        const select = create('select');
+        select.required = true;
+        const placeholder = create('option', '請選擇聯想方式');
+        placeholder.value = '';
+        select.append(placeholder);
+        for (const type of types) select.append(create('option', type));
+        typeLabel.append(select);
+        form.append(typeLabel);
+        inputs.type = select;
+        for (const [name, label, maxLength, hint] of designFields) {
+          const wrapper = create('label', label);
+          const input = create(name === 'page' ? 'input' : 'textarea');
+          input.required = true;
+          input.maxLength = maxLength;
+          input.placeholder = hint;
+          wrapper.append(input);
+          form.append(wrapper);
+          inputs[name] = input;
+        }
+        const save = create('button', '儲存聯想策略');
+        save.type = 'submit';
+        const latest = create('button', '載入最新內容');
+        latest.type = 'button';
+        latest.hidden = true;
+        const buttons = create('div', '', 'submission-actions');
+        buttons.append(save, latest);
+        const status = create('p', '', 'submission-status');
+        status.setAttribute('role', 'status');
+        form.append(buttons, status);
+        panel.append(form);
+
+        const received = create('details', '', 'submission-panel');
+        const preview = create('div');
+        previews.set(state.number, preview);
+        const receivedStatus = create('p', '', 'submission-status');
+        receivedStatus.setAttribute('role', 'status');
+        received.append(create('summary', '查看第 ' + reviewer + ' 組提供的建議'), receivedStatus, preview);
+        received.addEventListener('toggle', async () => {
+          if (!received.open) return;
+          receivedStatus.textContent = '正在讀取最新建議…';
+          try {
+            const result = await fetch(associationApi, { cache: 'no-store', credentials: 'omit' });
+            if (!result.ok) throw new Error('無法讀取互評。');
+            const data = await result.json();
+            showReceived(reviewer, data.records[reviewer]);
+            receivedStatus.textContent = '';
+          } catch {
+            receivedStatus.textContent = '暫時無法更新。可收合後再展開重試。';
+          }
+        });
+        section.append(create('h3', '聯想策略互評'), assignment, panel, received);
+        state.group.querySelector('.group-body').append(section);
+
+        let current = records[state.number];
+        function fillSaved() {
+          for (const [name, element] of Object.entries(inputs)) element.value = current[name] || '';
+          latest.hidden = true;
+          save.disabled = false;
+          status.textContent = current.type ? '已載入本組儲存的設計。' : '';
+        }
+        fillSaved();
+        latest.addEventListener('click', fillSaved);
+
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          if (save.disabled) return;
+          const values = Object.fromEntries(Object.entries(inputs).map(([name, input]) => [name, input.value]));
+          save.disabled = true;
+          for (const input of Object.values(inputs)) input.disabled = true;
+          status.textContent = '儲存中…';
+          try {
+            const result = await fetch(associationApi + '/' + state.number, {
+              method: 'PUT', credentials: 'omit', headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ...values, target, revision: current.revision }),
+            });
+            const data = await result.json();
+            if (result.status === 409 && data.record) {
+              current = data.record;
+              showReceived(state.number, current);
+              latest.hidden = false;
+              status.textContent = '這組已有更新的版本。表單保留你剛輸入的內容，可先複製留存，再載入最新內容。';
+              return;
+            }
+            if (!result.ok) throw new Error(data.error || '暫時無法儲存。');
+            current = data.record;
+            showReceived(state.number, current);
+            status.textContent = '已儲存，第 ' + target + ' 組現在可以查看。';
+          } catch (error) {
+            status.textContent = (error instanceof TypeError ? '連線失敗，請稍後重試。' : error.message) + ' 表單保留輸入內容。';
+          } finally {
+            for (const input of Object.values(inputs)) input.disabled = false;
+            save.disabled = !latest.hidden;
+          }
+        });
+      }
+      for (const state of states) showReceived(state.number, records[state.number]);
+      associationStatus.textContent = '';
+    } catch {
+      associationStatus.textContent = '暫時無法讀取聯想策略互評。';
+      associationRetry.hidden = false;
+    }
+  }
+
+  associationRetry.addEventListener('click', loadAssociationTask);
+  loadAssociationTask();
 })();
 </script>
 </body>
