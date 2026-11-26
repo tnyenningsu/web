@@ -138,8 +138,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   </aside>
   <section aria-labelledby="groups">
     <div class="section-header"><h2 id="groups" tabindex="-1">各組回饋</h2><p>12 組已評閱 · 點選組別展開</p></div>
-    <div class="association-guide">
-      <strong>聯想策略融入</strong>　展開自己的組別，自選兩個不同組別，每組各設計一份。選對方繪本的一頁，引導孩子把圖文與生活經驗或已知事物連起來，再帶孩子回到繪本。<br>例：看見雨傘圖，請孩子說說放學遇到下雨的經驗，再回到圖上找角色帶傘的原因。
+    <div class="association-guide" hidden>
       <span id="association-status" role="status"></span>
       <button id="association-retry" type="button" hidden>重新讀取聯想策略</button>
     </div>
@@ -870,6 +869,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
   }
 
   async function loadAssociationTask() {
+    associationStatus.parentElement.hidden = false;
     associationRetry.hidden = true;
     associationStatus.textContent = '正在讀取聯想策略…';
     try {
@@ -878,6 +878,7 @@ summary:hover, .group[open] > summary { background: var(--teal-soft); }
       const previews = new Map();
       for (const state of states) mountAssociation(state, types, records, previews);
       associationStatus.textContent = '';
+      associationStatus.parentElement.hidden = true;
     } catch {
       associationStatus.textContent = '暫時無法讀取聯想策略。';
       associationRetry.hidden = false;
